@@ -4,18 +4,18 @@
     <color name="primary_dark">#D32F2F</color>
     <color name="primary_light">#FFCDD2</color>
 
-    <color name="secondary">#448aaf</color>
+    <color name="secondary">#448aff</color>
     <color name="secondary_dark">#005ecb</color>
     <color name="secondary_light">#005ecb</color>
 
     <color name="accent">@color/secondary</color>
 
     <color name="primary_text">@color/black</color>
-    <color name="secondary_text">@color/white</color>
+    <color name="secondary_text">#757575</color>
 
     <color name="icons">@color/white</color>
     <color name="divider">#bdbdbd</color>
 
-    <color name="black">#ff191919</color>
+    <color name="black">#ff212121</color>
     <color name="white">#ffffffff</color>
 </resources>
