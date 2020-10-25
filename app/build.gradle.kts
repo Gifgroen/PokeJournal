@@ -4,16 +4,16 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.2")
+    compileSdkVersion(AndroidConfig.sdkVersion)
+    buildToolsVersion(AndroidConfig.buildToolsVersion)
 
     defaultConfig {
-        applicationId("com.gifgroen.pokejournal")
-        minSdkVersion(16)
-        targetSdkVersion(30)
+        applicationId(AndroidConfig.appId)
+        minSdkVersion(AndroidConfig.minSdkVersion)
+        targetSdkVersion(AndroidConfig.sdkVersion)
 
-        versionCode(1)
-        versionName("1.0")
+        versionCode(AndroidConfig.versionCode)
+        versionName(AndroidConfig.versionName)
 
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
     }
@@ -34,13 +34,13 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Dependencies.kotlinVersion}")
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("com.google.android.material:material:1.2.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
+    implementation(kotlin(Dependencies.Kotlin.stdlib, Dependencies.Kotlin.version))
+    implementation(Dependencies.AndroidX.coreKtx)
+    implementation(Dependencies.AndroidX.appCompat)
+    implementation(Dependencies.Material.material)
+    implementation(Dependencies.AndroidX.constraintLayout)
 
-    testImplementation("junit:junit:4.13.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    testImplementation(Dependencies.Testing.junit)
+    androidTestImplementation(Dependencies.Testing.AndroidXJunit)
+    androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
 }
