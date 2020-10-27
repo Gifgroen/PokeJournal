@@ -15,6 +15,14 @@ object Dependencies {
         const val rxKotlin = "io.reactivex.rxjava3:rxkotlin:3.0.1"
     }
 
+    object Data {
+        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+
+        const val retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava3:2.9.0"
+
+        const val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:2.9.0"
+    }
+
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.3.2"
 

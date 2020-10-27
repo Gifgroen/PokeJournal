@@ -1,6 +1,6 @@
-include(":app")
 include(":domain")
-include(":data:androidData")
+include(":data:android")
+include(":app")
 
 rootProject.name = "PokeJournal"
 rootProject.buildFileName = "build.gradle.kts"

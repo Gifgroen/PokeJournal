@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface PokemonDataSource {
 
-    fun getPokemon(): Observable<List<Pokemon>>
+    fun getPokemon(): Single<List<Pokemon>>
 
     fun getPokemon(id: Int): Single<Pokemon>
 }

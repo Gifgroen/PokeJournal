@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    id("com.android.library")
+    id("kotlin-android")
 }
 
 android {
@@ -8,24 +8,19 @@ android {
     buildToolsVersion(AndroidConfig.buildToolsVersion)
 
     defaultConfig {
-        applicationId(AndroidConfig.appId)
         minSdkVersion(AndroidConfig.minSdkVersion)
         targetSdkVersion(AndroidConfig.sdkVersion)
+        versionCode = AndroidConfig.versionCode
+        versionName = AndroidConfig.versionName
 
-        versionCode(AndroidConfig.versionCode)
-        versionName(AndroidConfig.versionName)
-
-        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         named("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-        named("debug") {
-            isTestCoverageEnabled = true
-            applicationIdSuffix = ".debug"
         }
     }
     compileOptions {
@@ -39,16 +34,14 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-    implementation(project(":data:android"))
 
     implementation(kotlin(Dependencies.Kotlin.stdlib, Dependencies.Kotlin.version))
-    implementation(Dependencies.AndroidX.coreKtx)
-    implementation(Dependencies.AndroidX.appCompat)
-    implementation(Dependencies.Material.material)
-    implementation(Dependencies.AndroidX.constraintLayout)
-
     implementation(Dependencies.Rx.rxKotlin)
-
+    // Networking
+    implementation(Dependencies.Data.retrofit)
+    implementation(Dependencies.Data.retrofitConverterMoshi)
+    implementation(Dependencies.Data.retrofitAdapterRxJava)
+    // Testing
     testImplementation(Dependencies.Testing.junitJupiterEngine)
     androidTestImplementation(Dependencies.Testing.AndroidXJunit)
     androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
