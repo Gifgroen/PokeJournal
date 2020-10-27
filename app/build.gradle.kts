@@ -23,6 +23,10 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        named("debug") {
+            isTestCoverageEnabled = true
+            applicationIdSuffix = ".debug"
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -40,7 +44,7 @@ dependencies {
     implementation(Dependencies.Material.material)
     implementation(Dependencies.AndroidX.constraintLayout)
 
-    testImplementation(Dependencies.Testing.junit)
+    testImplementation(Dependencies.Testing.junitJupiterEngine)
     androidTestImplementation(Dependencies.Testing.AndroidXJunit)
     androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
 }

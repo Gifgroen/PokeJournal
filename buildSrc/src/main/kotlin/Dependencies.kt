@@ -11,6 +11,10 @@ object Dependencies {
         const val stdlib = "stdlib"
     }
 
+    object Rx {
+        const val rxKotlin = "io.reactivex.rxjava3:rxkotlin:3.0.1"
+    }
+
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.3.2"
 
@@ -24,10 +28,15 @@ object Dependencies {
     }
 
     object Testing {
+
         const val AndroidXJunit = "androidx.test.ext:junit:1.1.2"
 
-        const val junit = "junit:junit:4.13.1"
+        const val junitJupiterEngine = "org.junit.jupiter:junit-jupiter-engine:5.7.0"
+
+        const val mockK = "io.mockk:mockk:1.10.2"
 
         const val AndroidXEspressoCore = "androidx.test.espresso:espresso-core:3.3.0"
+
+
     }
 }
