@@ -5,7 +5,7 @@ import com.gifgroen.domain.data.PokemonDataSource
 import com.gifgroen.domain.entities.Pokemon
 import io.reactivex.rxjava3.core.Single
 
-class PokemonRemoteDataSource(private val api: PokeApi): PokemonDataSource {
+class PokemonRemoteDataSourceImpl(private val api: PokeApi): PokemonDataSource {
 
     override fun getPokemon(): Single<List<Pokemon>> {
         return api.listPokemon()

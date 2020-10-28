@@ -5,9 +5,9 @@ import com.gifgroen.domain.entities.Pokemon
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
-class PokemonRoomDataCache : PokemonDataCache {
+class PokemonRoomDataCacheImpl : PokemonDataCache {
 
-    val pokemonList: MutableList<Pokemon> = mutableListOf()
+    private val pokemonList: MutableList<Pokemon> = mutableListOf()
 
     override fun create(pokemon: Pokemon): Completable {
         pokemonList.add(pokemon)

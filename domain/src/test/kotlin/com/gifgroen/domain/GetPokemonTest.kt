@@ -2,7 +2,7 @@ package com.gifgroen.domain
 
 import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.domain.data.PokemonRepository
-import com.gifgroen.domain.usecases.GetPokemon
+import com.gifgroen.domain.usecases.GetPokemonUseCase
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.rxjava3.core.Single
@@ -20,12 +20,26 @@ class GetPokemonTest {
             pokemonRepository.getPokemon(1)
         } returns Single.just(pokemon)
 
-        val testSubscriber = GetPokemon(pokemonRepository).getPokemon(1)
+        val testSubscriber = GetPokemonUseCase(pokemonRepository).getPokemon(1)
             .test()
 
         testSubscriber.hasSubscription()
         testSubscriber.assertComplete()
         testSubscriber.assertNoErrors()
         testSubscriber.assertValue(pokemon)
+    }
+
+    @Test
+    fun `getPokemon returns Error`() {
+        every {
+            pokemonRepository.getPokemon(1)
+        } returns Single.error(Throwable())
+
+        val testSubscriber = GetPokemonUseCase(pokemonRepository).getPokemon(1)
+            .test()
+
+        testSubscriber.hasSubscription()
+        testSubscriber.assertNotComplete()
+        testSubscriber.assertNoValues()
     }
 }

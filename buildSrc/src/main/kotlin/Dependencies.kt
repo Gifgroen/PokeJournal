@@ -15,6 +15,14 @@ object Dependencies {
         const val rxKotlin = "io.reactivex.rxjava3:rxkotlin:3.0.1"
     }
 
+    object Di {
+        private const val version = "2.29.1"
+
+        const val dagger = "com.google.dagger:dagger:$version"
+
+        const val daggerCompiler = "com.google.dagger:dagger-compiler:$version"
+    }
+
     object Data {
         const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
 
@@ -24,6 +32,8 @@ object Dependencies {
     }
 
     object AndroidX {
+        const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+
         const val coreKtx = "androidx.core:core-ktx:1.3.2"
 
         const val appCompat = "androidx.appcompat:appcompat:1.2.0"
