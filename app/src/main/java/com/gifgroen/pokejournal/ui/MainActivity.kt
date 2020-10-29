@@ -7,12 +7,15 @@ import com.gifgroen.pokejournal.R
 import com.gifgroen.pokejournal.di.components.DaggerAppComponent
 import com.gifgroen.pokejournal.di.modules.ViewModelModule
 import com.gifgroen.pokejournal.viewmodel.ListPokemonViewModel
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModel: ListPokemonViewModel
+
+    private var disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +25,22 @@ class MainActivity : AppCompatActivity() {
             .viewModelModule(ViewModelModule(this))
             .build()
             .inject(this)
+    }
 
-        viewModel.getPokemon(::showPokemon, ::onError)
+    override fun onStart() {
+        super.onStart()
+        if (disposable.isDisposed) {
+            disposable = CompositeDisposable()
+        }
+        disposable.run {
+            val single = viewModel.getPokemon()
+            add(single.subscribe(::showPokemon, ::onError))
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        disposable.dispose()
     }
 
     private fun showPokemon(pokemon: List<Pokemon>) {

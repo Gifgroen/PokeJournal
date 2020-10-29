@@ -60,6 +60,7 @@ dependencies {
     implementation(Dependencies.Data.retrofitAdapterRxJava)
 
     testImplementation(Dependencies.Testing.junitJupiterEngine)
+    testImplementation(Dependencies.Testing.mockK)
     androidTestImplementation(Dependencies.Testing.AndroidXJunit)
     androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
 }

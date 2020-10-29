@@ -3,18 +3,36 @@ package com.gifgroen.android.data
 import com.gifgroen.android.api.PokeApi
 import com.gifgroen.android.entity.NamedApiResource
 import com.gifgroen.android.entity.NamedApiResult
+import com.gifgroen.domain.data.PokemonDataSource
 import com.gifgroen.domain.entities.Pokemon
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
+import io.mockk.*
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit5.MockKExtension
 import io.reactivex.rxjava3.core.Single
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
+@ExtendWith(MockKExtension::class)
 class PokemonRemoteDataSourceImplTest {
 
-    private val api: PokeApi = mockk()
+    @MockK
+    private lateinit var api: PokeApi
 
     private val pokemon = Pokemon(1, "bulbasaur")
+
+    private lateinit var subject: PokemonDataSource
+
+    @BeforeEach
+    fun setUp() {
+        subject = PokemonRemoteDataSourceImpl(api)
+    }
+
+    @AfterEach
+    fun teardown() {
+        clearAllMocks()
+    }
 
     @Test
     fun `getPokemon() returns expected list of Pokemon Entity`() {
@@ -29,14 +47,12 @@ class PokemonRemoteDataSourceImplTest {
             api.listPokemon()
         } returns Single.just(result)
 
-        val subject = PokemonRemoteDataSourceImpl(api)
-            .getPokemon()
-            .test()
+        val testSubscriber = subject.getPokemon().test()
 
-        subject.hasSubscription()
-        subject.assertNoErrors()
-        subject.assertComplete()
-        subject.assertValue {
+        testSubscriber.hasSubscription()
+        testSubscriber.assertNoErrors()
+        testSubscriber.assertComplete()
+        testSubscriber.assertValue {
             it.size == 1 && it.first() == pokemon
         }
 
@@ -54,20 +70,19 @@ class PokemonRemoteDataSourceImplTest {
             api.listPokemon()
         } returns Single.just(result)
 
-        val subject = PokemonRemoteDataSourceImpl(api)
-            .getPokemon()
-            .test()
+        val testSubscriber = subject.getPokemon().test()
 
-        subject.hasSubscription()
-        subject.assertNoErrors()
-        subject.assertComplete()
-        subject.assertValue {
+        testSubscriber.hasSubscription()
+        testSubscriber.assertNoErrors()
+        testSubscriber.assertComplete()
+        testSubscriber.assertValue {
             it.isEmpty()
         }
 
         verify(exactly = 1) {
             api.listPokemon()
         }
+        confirmVerified(api)
     }
 
     @Test
@@ -78,20 +93,19 @@ class PokemonRemoteDataSourceImplTest {
             api.listPokemon()
         } returns Single.just(result)
 
-        val subject = PokemonRemoteDataSourceImpl(api)
-            .getPokemon()
-            .test()
+        val testSubscriber = subject.getPokemon().test()
 
-        subject.hasSubscription()
-        subject.assertNoErrors()
-        subject.assertComplete()
-        subject.assertValue {
+        testSubscriber.hasSubscription()
+        testSubscriber.assertNoErrors()
+        testSubscriber.assertComplete()
+        testSubscriber.assertValue {
             it.isEmpty()
         }
 
         verify(exactly = 1) {
             api.listPokemon()
         }
+        confirmVerified(api)
     }
 
     @Test
@@ -100,9 +114,7 @@ class PokemonRemoteDataSourceImplTest {
             api.listPokemon()
         } returns Single.error(Throwable("An error occurred!"))
 
-        val subject = PokemonRemoteDataSourceImpl(api)
-            .getPokemon()
-            .test()
+        val subject = subject.getPokemon().test()
 
         subject.hasSubscription()
         subject.assertError(Throwable::class.java)
@@ -112,5 +124,6 @@ class PokemonRemoteDataSourceImplTest {
         verify(exactly = 1) {
             api.listPokemon()
         }
+        confirmVerified(api)
     }
 }
