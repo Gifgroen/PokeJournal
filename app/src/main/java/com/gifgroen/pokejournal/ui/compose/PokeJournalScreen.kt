@@ -1,18 +1,15 @@
 package com.gifgroen.pokejournal.ui.compose
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumnFor
+import android.util.Log
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rxjava3.subscribeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
 import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.pokejournal.viewmodel.ListPokemonViewModel
 
@@ -22,40 +19,45 @@ fun PokeJournalScreen(
 ) {
     val data = viewModel.getPokemon()
         .subscribeAsState(initial = emptyList())
-
-    PokemonListing(data)
+    PokemonListing(
+        state = data,
+        modifier = Modifier.fillMaxSize()
+    ) { index ->
+        Log.e("PokeJournalScreen", "Clicked $index")
+    }
 }
 
 @Composable
 private fun PokemonListing(
-    data: State<List<Pokemon>>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    state: State<List<Pokemon>>,
+    onItemClick: (Int) -> Unit
 ) {
-    Box {
-        LazyColumnFor(items = data.value) {
-            Row(
-                modifier = modifier.padding(16.dp)
-                    .fillMaxWidth()
-            ) {
-                Text(text = "${it.id}")
-                Text(text = it.name)
-            }
-        }
+    LazyColumnForIndexed(
+        items = state.value
+    ) { index, pokemon ->
+        PokemonItem(
+            item = pokemon,
+            modifier = modifier,
+            onItemClick = { onItemClick(index) }
+        )
     }
 }
 
-@Preview
 @Composable
-fun PokeJournalScreen() {
-    val data =
-        mutableStateOf(
-            listOf(
-                Pokemon(1, "Bulbasaur1", ""),
-                Pokemon(2, "Bulbasaur2", ""),
-                Pokemon(3, "Bulbasaur3", ""),
-                Pokemon(4, "Bulbasaur4", ""),
-                Pokemon(5, "Bulbasaur5", "")
-            )
-        )
-    PokemonListing(data = data)
+private fun PokemonItem(
+    item: Pokemon,
+    onItemClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier.clickable(onClick = onItemClick)
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(text = "${item.id}")
+            Text(text = item.name)
+        }
+    }
 }
