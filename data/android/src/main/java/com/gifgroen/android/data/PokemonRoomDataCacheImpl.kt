@@ -3,15 +3,19 @@ package com.gifgroen.android.data
 import com.gifgroen.domain.data.PokemonDataCache
 import com.gifgroen.domain.entities.Pokemon
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
-class PokemonRoomDataCacheImpl : PokemonDataCache {
+class PokemonRoomDataCacheImpl(
+    val cache: List<Pokemon> = emptyList()
+) : PokemonDataCache {
 
-    private val pokemonList: MutableList<Pokemon> = mutableListOf()
+    override fun read(): Observable<List<Pokemon>> {
+        TODO("Not yet implemented")
+    }
 
     override fun create(pokemon: Pokemon): Completable {
-        pokemonList.add(pokemon)
-        return Completable.complete()
+        TODO("Not yet implemented")
     }
 
     override fun read(id: Int): Single<Pokemon> {

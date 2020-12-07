@@ -2,7 +2,7 @@ object Dependencies {
 
     object BuildPlugins {
 
-        const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.0"
+        const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha02"
 
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
     }
@@ -28,13 +28,15 @@ object Dependencies {
         const val daggerCompiler = "com.google.dagger:dagger-compiler:$version"
     }
 
+
     object Data {
+        private const val retrofitVersion = "2.9.0"
 
-        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
 
-        const val retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava3:2.9.0"
+        const val retrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion"
 
-        const val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:2.9.0"
+        const val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     }
 
     object AndroidX {
@@ -62,7 +64,12 @@ object Dependencies {
         const val mockK = "io.mockk:mockk:1.10.2"
 
         const val AndroidXEspressoCore = "androidx.test.espresso:espresso-core:3.3.0"
+    }
 
+    object Compose {
 
+        const val version = Kotlin.version
+
+        const val extensionVersion = "1.0.0-alpha07"
     }
 }

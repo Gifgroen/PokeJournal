@@ -45,5 +45,6 @@ class NetworkModule {
     fun providesMoshiConverterFactory(): MoshiConverterFactory = MoshiConverterFactory.create()
 
     @Provides
-    fun providesRxJava3CallAdapterFactory(): RxJava3CallAdapterFactory = RxJava3CallAdapterFactory.create()
+    fun providesRxJava3CallAdapterFactory(): RxJava3CallAdapterFactory =
+        RxJava3CallAdapterFactory.create()
 }

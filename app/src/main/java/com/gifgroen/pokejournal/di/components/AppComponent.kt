@@ -1,7 +1,7 @@
 package com.gifgroen.pokejournal.di.components
 
 import com.gifgroen.pokejournal.di.modules.ViewModelModule
-import com.gifgroen.pokejournal.ui.MainActivity
+import com.gifgroen.pokejournal.ui.activity.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
