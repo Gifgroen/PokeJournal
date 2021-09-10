@@ -5,18 +5,18 @@ plugins {
 }
 
 android {
-    compileSdkVersion(AndroidConfig.sdkVersion)
-    buildToolsVersion(AndroidConfig.buildToolsVersion)
+    compileSdk = AndroidConfig.sdkVersion
+    buildToolsVersion = AndroidConfig.buildToolsVersion
 
     defaultConfig {
-        applicationId(AndroidConfig.appId)
-        minSdkVersion(AndroidConfig.minSdkVersion)
-        targetSdkVersion(AndroidConfig.sdkVersion)
+        applicationId = AndroidConfig.appId
+        minSdk = AndroidConfig.minSdkVersion
+        targetSdk = AndroidConfig.sdkVersion
 
-        versionCode(AndroidConfig.versionCode)
-        versionName(AndroidConfig.versionName)
+        versionCode = AndroidConfig.versionCode
+        versionName = AndroidConfig.versionName
 
-        testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
         compose = true
