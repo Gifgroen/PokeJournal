@@ -2,8 +2,11 @@ package com.gifgroen.pokejournal.ui.compose
 
 import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumnForIndexed
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -22,42 +25,38 @@ fun PokeJournalScreen(
     PokemonListing(
         state = data,
         modifier = Modifier.fillMaxSize()
-    ) { index ->
-        Log.e("PokeJournalScreen", "Clicked $index")
+    ) { pokemon ->
+        Log.e("PokeJournalScreen", "Clicked $pokemon")
     }
 }
 
 @Composable
-private fun PokemonListing(
+internal fun PokemonListing(
     modifier: Modifier = Modifier,
     state: State<List<Pokemon>>,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Pokemon) -> Unit
 ) {
-    LazyColumnForIndexed(
-        items = state.value
-    ) { index, pokemon ->
-        PokemonItem(
-            item = pokemon,
-            modifier = modifier,
-            onItemClick = { onItemClick(index) }
-        )
+    LazyColumn {
+        items(state.value) { pokemon ->
+            PokemonItem(
+                item = pokemon,
+                modifier = modifier,
+                onItemClick = { onItemClick(pokemon) }
+            )
+        }
     }
 }
 
 @Composable
-private fun PokemonItem(
+internal fun PokemonItem(
     item: Pokemon,
     onItemClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier.clickable(onClick = onItemClick)
+    Row(
+        modifier = modifier.clickable(onClick = onItemClick).padding(16.dp)
     ) {
-        Row(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(text = "${item.id}")
-            Text(text = item.name)
-        }
+        Text(text = "${item.id}")
+        Text(text = item.name)
     }
 }

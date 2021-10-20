@@ -2,14 +2,14 @@ object Dependencies {
 
     object BuildPlugins {
 
-        const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.2"
+        const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.3"
 
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.version}"
     }
 
     object Kotlin {
 
-        const val version = "1.4.10"
+        const val version = "1.5.31"
 
         const val stdlib = "stdlib"
     }
@@ -21,7 +21,7 @@ object Dependencies {
 
     object Di {
 
-        private const val version = "2.29.1"
+        private const val version = "2.39.1"
 
         const val dagger = "com.google.dagger:dagger:$version"
 
@@ -70,6 +70,6 @@ object Dependencies {
 
         const val version = Kotlin.version
 
-        const val extensionVersion = "1.0.0-alpha07"
+        const val extensionVersion = "1.0.4"
     }
 }

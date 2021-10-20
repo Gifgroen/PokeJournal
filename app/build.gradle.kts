@@ -6,7 +6,6 @@ plugins {
 
 android {
     compileSdk = AndroidConfig.sdkVersion
-    buildToolsVersion = AndroidConfig.buildToolsVersion
 
     defaultConfig {
         applicationId = AndroidConfig.appId
@@ -43,7 +42,6 @@ android {
         useIR = true
     }
     composeOptions {
-        kotlinCompilerVersion = Dependencies.Kotlin.version
         kotlinCompilerExtensionVersion = Dependencies.Compose.extensionVersion
     }
 }
@@ -69,9 +67,14 @@ dependencies {
     implementation(Dependencies.Data.retrofitConverterMoshi)
     implementation(Dependencies.Data.retrofitAdapterRxJava)
 
+    implementation("androidx.activity:activity-compose:1.3.1")
+
     implementation("androidx.compose.ui:ui:${Dependencies.Compose.extensionVersion}")
     // Tooling support (Previews, etc.)
-    implementation("androidx.ui:ui-tooling:${Dependencies.Compose.extensionVersion}")
+    implementation("androidx.compose.ui:ui-tooling:${Dependencies.Compose.extensionVersion}")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-rc01")
+
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation("androidx.compose.foundation:foundation:${Dependencies.Compose.extensionVersion}")
     // Material Design
@@ -83,7 +86,7 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-rxjava3:${Dependencies.Compose.extensionVersion}")
 
     // UI Tests
-    androidTestImplementation("androidx.ui:ui-test:${Dependencies.Compose.extensionVersion}")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Dependencies.Compose.extensionVersion}")
 
     testImplementation(Dependencies.Testing.junitJupiterEngine)
     testImplementation(Dependencies.Testing.mockK)

@@ -1,8 +1,8 @@
 package com.gifgroen.pokejournal.ui.activity
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.platform.setContent
 import com.gifgroen.pokejournal.di.components.DaggerAppComponent
 import com.gifgroen.pokejournal.di.modules.ViewModelModule
 import com.gifgroen.pokejournal.ui.compose.PokeJournalScreen
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             .inject(this)
 
         setContent {
-            PokeJournalScreen(viewModel)
+            PokeJournalScreen(viewModel = viewModel)
         }
     }
 }
