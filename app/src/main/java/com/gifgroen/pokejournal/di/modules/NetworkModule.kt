@@ -22,13 +22,11 @@ class NetworkModule {
         @Named("baseUrl") baseUrl: String,
         client: OkHttpClient,
         moshiConverterFactory: MoshiConverterFactory,
-        rxJava3CallAdapterFactory: RxJava3CallAdapterFactory
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(moshiConverterFactory)
-            .addCallAdapterFactory(rxJava3CallAdapterFactory)
             .build()
     }
 
@@ -43,8 +41,4 @@ class NetworkModule {
 
     @Provides
     fun providesMoshiConverterFactory(): MoshiConverterFactory = MoshiConverterFactory.create()
-
-    @Provides
-    fun providesRxJava3CallAdapterFactory(): RxJava3CallAdapterFactory =
-        RxJava3CallAdapterFactory.create()
 }

@@ -11,9 +11,6 @@ android {
         minSdk = AndroidConfig.minSdkVersion
         targetSdk = AndroidConfig.sdkVersion
 
-//        versionCode = AndroidConfig.versionCode
-//        versionName = AndroidConfig.versionName
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -40,15 +37,18 @@ dependencies {
     implementation(project(":domain"))
 
     implementation(kotlin(Dependencies.Kotlin.stdlib, Dependencies.Kotlin.version))
-    implementation(Dependencies.Rx.rxKotlin)
+    implementation(Dependencies.Coroutines.core)
+
     // Networking
     implementation(Dependencies.Data.retrofit)
     implementation(Dependencies.Data.retrofitConverterMoshi)
     implementation(Dependencies.Data.retrofitAdapterRxJava)
 
     // Testing
+    testImplementation(Dependencies.Testing.Coroutines.test)
     testImplementation(Dependencies.Testing.junitJupiterEngine)
     testImplementation(Dependencies.Testing.mockK)
+
     androidTestImplementation(Dependencies.Testing.AndroidXJunit)
     androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
 }

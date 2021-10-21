@@ -10,11 +10,14 @@ java {
 
 dependencies {
     implementation(kotlin(Dependencies.Kotlin.stdlib, Dependencies.Kotlin.version))
-    implementation(Dependencies.Rx.rxKotlin)
 
+    implementation(Dependencies.Coroutines.core)
+
+    testImplementation(Dependencies.Testing.Coroutines.test)
     testImplementation(Dependencies.Testing.junitJupiterEngine)
     testImplementation(Dependencies.Testing.mockK)
 }
+
 
 tasks.test {
     useJUnitPlatform()

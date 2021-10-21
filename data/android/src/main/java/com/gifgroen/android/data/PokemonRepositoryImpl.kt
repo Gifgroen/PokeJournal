@@ -4,21 +4,22 @@ import com.gifgroen.domain.data.PokemonDataCache
 import com.gifgroen.domain.data.PokemonDataSource
 import com.gifgroen.domain.data.PokemonRepository
 import com.gifgroen.domain.entities.Pokemon
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class PokemonRepositoryImpl(
     private val remoteDataStore: PokemonDataSource,
     private val localDataCache: PokemonDataCache
 ) : PokemonRepository {
 
-    override fun getPokemon(): Single<List<Pokemon>> {
-        val remotePokemon = remoteDataStore.getPokemon()
-        // TODO: return stream to DB, store remote and emit new results
+    override suspend fun getPokemonAsync(): List<Pokemon> {
+        val remotePokemon = withContext(Dispatchers.IO) { remoteDataStore.getPokemonAsync() }
+            // TODO: return stream to DB, store remote and emit new results remotePokemon
         return remotePokemon
     }
 
-    override fun getPokemon(id: Int): Single<Pokemon> {
-        return remoteDataStore.getPokemon(id)
+    override suspend fun getPokemonAsync(id: Int): Pokemon {
+        return remoteDataStore.getPokemonAsync(id)
     }
 }

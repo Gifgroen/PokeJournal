@@ -38,8 +38,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
-        useIR = true
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Dependencies.Compose.extensionVersion
@@ -60,8 +59,8 @@ dependencies {
     implementation(Dependencies.AndroidX.appCompat)
     implementation(Dependencies.Material.material)
     implementation(Dependencies.AndroidX.constraintLayout)
-    // Rx
-    implementation(Dependencies.Rx.rxKotlin)
+    // Coroutines
+    implementation(Dependencies.Coroutines.core)
     // Networking
     implementation(Dependencies.Data.retrofit)
     implementation(Dependencies.Data.retrofitConverterMoshi)

@@ -14,6 +14,11 @@ object Dependencies {
         const val stdlib = "stdlib"
     }
 
+    object Coroutines {
+
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
+    }
+
     object Rx {
 
         const val rxKotlin = "io.reactivex.rxjava3:rxkotlin:3.0.1"
@@ -64,6 +69,11 @@ object Dependencies {
         const val mockK = "io.mockk:mockk:1.10.2"
 
         const val AndroidXEspressoCore = "androidx.test.espresso:espresso-core:3.3.0"
+
+        object Coroutines {
+
+            const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
+        }
     }
 
     object Compose {

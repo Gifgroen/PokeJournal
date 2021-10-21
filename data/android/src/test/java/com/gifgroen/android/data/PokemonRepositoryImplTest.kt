@@ -45,7 +45,7 @@ class PokemonRepositoryImplTest {
             remoteDataStore.getPokemon()
         } returns Single.just(listOf(pokemon))
 
-        val testSubscriber = subject.getPokemon().test()
+        val testSubscriber = subject.getPokemonAsync().test()
 
         testSubscriber.hasSubscription()
         testSubscriber.assertNoErrors()
@@ -70,7 +70,7 @@ class PokemonRepositoryImplTest {
             remoteDataStore.getPokemon()
         } returns Single.error(Throwable("An error occurred"))
 
-        val testSubscriber = subject.getPokemon().test()
+        val testSubscriber = subject.getPokemonAsync().test()
 
         testSubscriber.hasSubscription()
         testSubscriber.assertError(Throwable::class.java)

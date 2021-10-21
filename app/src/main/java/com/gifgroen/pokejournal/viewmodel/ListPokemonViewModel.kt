@@ -1,28 +1,28 @@
 package com.gifgroen.pokejournal.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.domain.usecases.GetPokemonUseCase
 import com.gifgroen.domain.usecases.ListPokemonUseCase
-import io.reactivex.rxjava3.annotations.NonNull
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class ListPokemonViewModel(
     private val listUseCase: ListPokemonUseCase,
     private val getUseCase: GetPokemonUseCase
 ) : ViewModel() {
 
-    fun getPokemon(): Single<List<Pokemon>> {
-        return listUseCase.getPokemon()
-            .observeOn(Schedulers.io())
-            .flattenAsObservable { it }
-            .flatMapSingle { fetchDetails(it.id) }
-            .toList()
-    }
+    val pokemonListFlow = MutableStateFlow<List<Pokemon>>(value = emptyList())
 
-    private fun fetchDetails(id: Int): @NonNull Single<Pokemon>? {
-        return getUseCase.getPokemon(id)
-//            .subscribeOn(Schedulers.io())
+    fun refresh() = viewModelScope.launch (Dispatchers.Default) { pokemonListFlow.value = getPokemonAsync().await() }
+
+    private suspend fun getPokemonAsync(): Deferred<List<Pokemon>> = viewModelScope.async {
+        val pokemonList = listUseCase.getPokemonAsync()
+
+        val jobs = pokemonList.map {
+            async(Dispatchers.Unconfined) { getUseCase.getPokemonAsync(it.id) }
+        }
+        jobs.awaitAll()
     }
 }
