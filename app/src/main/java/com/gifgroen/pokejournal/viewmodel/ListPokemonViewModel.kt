@@ -21,7 +21,7 @@ class ListPokemonViewModel(
         val pokemonList = listUseCase.getPokemonAsync()
 
         val jobs = pokemonList.map {
-            async(Dispatchers.Unconfined) { getUseCase.getPokemonAsync(it.id) }
+            async { getUseCase.getPokemonAsync(it.id) }
         }
         jobs.awaitAll()
     }
