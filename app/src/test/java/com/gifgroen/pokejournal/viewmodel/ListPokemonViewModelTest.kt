@@ -6,7 +6,8 @@ import com.gifgroen.domain.usecases.ListPokemonUseCase
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -33,71 +34,28 @@ class ListPokemonViewModelTest {
         clearAllMocks()
     }
 
-//    @Test
-//    fun `getPokemon return expected list of Entity`() {
-//
-//        val pokemonList = listOf(
-//            Pokemon(1, "bulbasaur"),
-//            Pokemon(2, "ivysaur")
-//        )
-//
-//        every {
-//            listUseCase.getPokemon()
-//        } returns Single.just(pokemonList)
-//
-//        val testSubscriber = subject.getPokemonAsync().test()
-//
-//        testSubscriber.hasSubscription()
-//        testSubscriber.assertValue { it == pokemonList }
-//        testSubscriber.assertNoErrors()
-//        testSubscriber.assertComplete()
-//
-//        verify(exactly = 1) {
-//            listUseCase.getPokemon()
-//        }
-//
-//        confirmVerified(listUseCase)
-//    }
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `getPokemon return expected list of Entity`() = runBlockingTest {
 
-//    @Test
-//    fun `getPokemon return empty list of Entity`() {
-//        val pokemonList = emptyList<Pokemon>()
-//
-//        every {
-//            listUseCase.getPokemon()
-//        } returns Single.just(pokemonList)
-//
-//        val testSubscriber = subject.getPokemonAsync().test()
-//
-//        testSubscriber.hasSubscription()
-//        testSubscriber.assertValue { it == pokemonList }
-//        testSubscriber.assertNoErrors()
-//        testSubscriber.assertComplete()
-//
-//        verify(exactly = 1) {
-//            listUseCase.getPokemon()
-//        }
-//
-//        confirmVerified(listUseCase)
-//    }
+        val pokemonList = listOf(
+            Pokemon(1, "bulbasaur"),
+            Pokemon(2, "ivysaur")
+        )
 
-//    @Test
-//    fun `getPokemon throws error`() {
-//        every {
-//            listUseCase.getPokemon()
-//        } returns Single.error(Throwable("An error occurred"))
-//
-//        val testSubscriber = subject.getPokemonAsync().test()
-//
-//        testSubscriber.hasSubscription()
-//        testSubscriber.assertNoValues()
-//        testSubscriber.assertError(Throwable::class.java)
-//        testSubscriber.assertNotComplete()
-//
-//        verify(exactly = 1) {
-//            listUseCase.getPokemon()
-//        }
-//
-//        confirmVerified(listUseCase)
-//    }
+        coEvery {
+            listUseCase.getPokemonAsync()
+        } returns pokemonList
+
+        subject.refresh()
+
+        coVerify(exactly = 1) {
+            listUseCase.getPokemonAsync()
+        }
+        coVerify(exactly = 2) {
+            getUseCase.getPokemonAsync(any())
+        }
+
+        confirmVerified(listUseCase)
+    }
 }

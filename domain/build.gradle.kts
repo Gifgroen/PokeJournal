@@ -18,7 +18,6 @@ dependencies {
     testImplementation(Dependencies.Testing.mockK)
 }
 
-
 tasks.test {
     useJUnitPlatform()
     testLogging {

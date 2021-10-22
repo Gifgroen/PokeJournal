@@ -46,8 +46,8 @@ dependencies {
 
     // Testing
     testImplementation(Dependencies.Testing.Coroutines.test)
-    testImplementation(Dependencies.Testing.junitJupiterEngine)
     testImplementation(Dependencies.Testing.mockK)
+    testImplementation(Dependencies.Testing.junitJupiterEngine)
 
     androidTestImplementation(Dependencies.Testing.AndroidXJunit)
     androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)

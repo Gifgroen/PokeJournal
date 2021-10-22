@@ -6,6 +6,7 @@ import com.gifgroen.domain.data.PokemonRepository
 import com.gifgroen.domain.entities.Pokemon
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 
 class PokemonRepositoryImpl(
@@ -14,7 +15,7 @@ class PokemonRepositoryImpl(
 ) : PokemonRepository {
 
     override suspend fun getPokemonAsync(): List<Pokemon> {
-        val remotePokemon = withContext(Dispatchers.IO) { remoteDataStore.getPokemonAsync() }
+        val remotePokemon =  remoteDataStore.getPokemonAsync()
             // TODO: return stream to DB, store remote and emit new results remotePokemon
         return remotePokemon
     }

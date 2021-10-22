@@ -3,14 +3,12 @@ package com.gifgroen.domain
 import com.gifgroen.domain.data.PokemonRepository
 import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.domain.usecases.GetPokemonUseCase
-import io.mockk.clearAllMocks
-import io.mockk.confirmVerified
-import io.mockk.every
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import io.mockk.verify
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
@@ -42,14 +40,14 @@ class GetPokemonTest {
     @ExperimentalCoroutinesApi
     @Test
     fun `getPokemon returns expected Entity`() = runBlockingTest {
-        every {
+        coEvery {
             pokemonRepository.getPokemonAsync(1)
-        } returns CompletableDeferred(pokemon)
+        } returns pokemon
 
-        val result = subject.getPokemonAsync(1).await()
+        val result = subject.getPokemonAsync(1)
         assert(result == pokemon)
 
-        verify(exactly = 1) {
+        coVerify(exactly = 1) {
             pokemonRepository.getPokemonAsync(1)
         }
         confirmVerified(pokemonRepository)
@@ -58,16 +56,19 @@ class GetPokemonTest {
     @ExperimentalCoroutinesApi
     @Test
     fun `getPokemon returns Error`() = runBlockingTest {
-        every {
-            pokemonRepository.getPokemonAsync(any())
+        coEvery {
+            pokemonRepository.getPokemonAsync(1)
         } throws Exception("Error ocurred")
 
-
-        Assertions.assertThrows(Exception::class.java) {
+        val exception = try {
             subject.getPokemonAsync(1)
+            null
+        } catch (exception: Exception){
+            exception
         }
+        Assertions.assertEquals(exception?.message, "Error ocurred")
 
-        verify(exactly = 1) {
+        coVerify(exactly = 1) {
             pokemonRepository.getPokemonAsync(1)
         }
         confirmVerified(pokemonRepository)
