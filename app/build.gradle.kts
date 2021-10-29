@@ -5,15 +5,15 @@ plugins {
 }
 
 android {
-    compileSdk = AndroidConfig.sdkVersion
+    compileSdk = appConfig.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = AndroidConfig.appId
-        minSdk = AndroidConfig.minSdkVersion
-        targetSdk = AndroidConfig.sdkVersion
+        applicationId = "com.gifgroen.pokejournal"
+        minSdk = appConfig.versions.minSdk.get().toInt()
+        targetSdk = appConfig.versions.targetSdk.get().toInt()
 
-        versionCode = AndroidConfig.versionCode
-        versionName = AndroidConfig.versionName
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,50 +46,48 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
     implementation(project(":data:android"))
+    implementation(project(":domain"))
 
-    implementation(Dependencies.Di.dagger)
-    kapt(Dependencies.Di.daggerCompiler)
+    implementation(libs.kotlin.stdlib)
 
-    implementation(Dependencies.AndroidX.lifecycleRuntimeKtx)
-
-    implementation(kotlin(Dependencies.Kotlin.stdlib, Dependencies.Kotlin.version))
-    implementation(Dependencies.AndroidX.coreKtx)
-    implementation(Dependencies.AndroidX.appCompat)
-    implementation(Dependencies.Material.material)
-    implementation(Dependencies.AndroidX.constraintLayout)
-    // Coroutines
-    implementation(Dependencies.Coroutines.core)
-    // Networking
-    implementation(Dependencies.Data.retrofit)
-    implementation(Dependencies.Data.retrofitConverterMoshi)
-    implementation(Dependencies.Data.retrofitAdapterRxJava)
-
-    implementation("androidx.activity:activity-compose:1.3.1")
-
-    implementation("androidx.compose.ui:ui:${Dependencies.Compose.extensionVersion}")
-    // Tooling support (Previews, etc.)
-    implementation("androidx.compose.ui:ui-tooling:${Dependencies.Compose.extensionVersion}")
-
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-rc01")
-
-    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    // Compose
+    implementation("androidx.activity:activity-compose:1.4.0")
     implementation("androidx.compose.foundation:foundation:${Dependencies.Compose.extensionVersion}")
-    // Material Design
-    implementation("androidx.compose.material:material:${Dependencies.Compose.extensionVersion}")
-    // Material design icons
+    // Compose Material
     implementation("androidx.compose.material:material-icons-core:${Dependencies.Compose.extensionVersion}")
     implementation("androidx.compose.material:material-icons-extended:${Dependencies.Compose.extensionVersion}")
-    // Integration with observables
+    implementation("androidx.compose.material:material:${Dependencies.Compose.extensionVersion}")
+    // Compose RxJava runtime
     implementation("androidx.compose.runtime:runtime-rxjava3:${Dependencies.Compose.extensionVersion}")
+    // Compose UI
+    implementation("androidx.compose.ui:ui-tooling:${Dependencies.Compose.extensionVersion}")
+    implementation("androidx.compose.ui:ui:${Dependencies.Compose.extensionVersion}")
+    // Compose VM Lifecycle
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
+
+    // AndroidX
+    implementation(Dependencies.AndroidX.appCompat)
+    implementation(Dependencies.AndroidX.constraintLayout)
+    implementation(Dependencies.AndroidX.coreKtx)
+    implementation(Dependencies.AndroidX.lifecycleRuntimeKtx)
+    // Networking
+    implementation(libs.bundles.retrofitRxMoshi)
+    // DI
+    implementation(libs.dagger.dagger)
+    kapt(libs.dagger.daggerCompiler)
+    // Google Material
+    implementation(libs.googleAndroidMaterial.material)
+    // Kotlin
+    implementation(libs.orgJetbrainsKotlin.kotlinxCoroutinesCore)
 
     // UI Tests
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Dependencies.Compose.extensionVersion}")
 
+    testImplementation(Dependencies.Testing.Coroutines.test)
     testImplementation(Dependencies.Testing.junitJupiterEngine)
     testImplementation(Dependencies.Testing.mockK)
 
-    androidTestImplementation(Dependencies.Testing.AndroidXJunit)
     androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
+    androidTestImplementation(Dependencies.Testing.AndroidXJunit)
 }

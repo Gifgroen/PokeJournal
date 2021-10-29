@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    compileSdk = AndroidConfig.sdkVersion
+    compileSdk = appConfig.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = AndroidConfig.minSdkVersion
-        targetSdk = AndroidConfig.sdkVersion
+        minSdk = appConfig.versions.minSdk.get().toInt()
+        targetSdk = appConfig.versions.targetSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -36,13 +36,11 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    implementation(kotlin(Dependencies.Kotlin.stdlib, Dependencies.Kotlin.version))
-    implementation(Dependencies.Coroutines.core)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.orgJetbrainsKotlin.kotlinxCoroutinesCore)
 
     // Networking
-    implementation(Dependencies.Data.retrofit)
-    implementation(Dependencies.Data.retrofitConverterMoshi)
-    implementation(Dependencies.Data.retrofitAdapterRxJava)
+    implementation(libs.bundles.retrofitRxMoshi)
 
     // Testing
     testImplementation(Dependencies.Testing.Coroutines.test)

@@ -9,11 +9,11 @@ java {
 }
 
 dependencies {
-    implementation(kotlin(Dependencies.Kotlin.stdlib, Dependencies.Kotlin.version))
-
-    implementation(Dependencies.Coroutines.core)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.orgJetbrainsKotlin.kotlinxCoroutinesCore)
 
     testImplementation(Dependencies.Testing.Coroutines.test)
+
     testImplementation(Dependencies.Testing.junitJupiterEngine)
     testImplementation(Dependencies.Testing.mockK)
 }

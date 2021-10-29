@@ -1,0 +1,23 @@
+[versions]
+agp = "7.0.3"
+kotlin = "1.5.31"
+kotlinxCoroutinesCore = "1.5.0"
+retrofit = "2.9.0"
+dagger = "2.39.1"
+daggerCompiler = "2.39.1"
+googleAndroidMaterial-material = "1.2.1"
+
+[libraries]
+gradlePlugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+gradlePlugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+orgJetbrainsKotlin-kotlinxCoroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-adapterRxJava = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
+retrofit-converterMoshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+dagger-dagger = {module = "com.google.dagger:dagger", version.ref = "dagger"}
+dagger-daggerCompiler = { module = "com.google.dagger:dagger-compiler", version.ref = "daggerCompiler" }
+googleAndroidMaterial-material = { module = "com.google.android.material:material", version.ref = "googleAndroidMaterial-material"}
+
+[bundles]
+retrofitRxMoshi = ["retrofit", "retrofit-adapterRxJava", "retrofit-converterMoshi"]
