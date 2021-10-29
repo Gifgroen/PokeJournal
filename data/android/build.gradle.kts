@@ -37,16 +37,13 @@ dependencies {
     implementation(project(":domain"))
 
     implementation(libs.kotlin.stdlib)
-    implementation(libs.orgJetbrainsKotlin.kotlinxCoroutinesCore)
-
+    implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
     // Networking
     implementation(libs.bundles.retrofitRxMoshi)
 
     // Testing
-    testImplementation(Dependencies.Testing.Coroutines.test)
-    testImplementation(Dependencies.Testing.junitJupiterEngine)
-    testImplementation(Dependencies.Testing.mockK)
+    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
+    testImplementation(libs.bundles.testing.jupiterMockK)
 
-    androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
-    androidTestImplementation(Dependencies.Testing.AndroidXJunit)
+    androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
 }

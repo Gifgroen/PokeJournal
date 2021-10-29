@@ -77,15 +77,13 @@ dependencies {
     // Google Material
     implementation(libs.googleAndroidMaterial.material)
     // Kotlin
-    implementation(libs.orgJetbrainsKotlin.kotlinxCoroutinesCore)
+    implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
+
+    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
+    testImplementation(libs.bundles.testing.jupiterMockK)
+
+    androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
     // UI Tests
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${appConfig.versions.compose.extensionVersion.get()}")
-
-    testImplementation(Dependencies.Testing.Coroutines.test)
-    testImplementation(Dependencies.Testing.junitJupiterEngine)
-    testImplementation(Dependencies.Testing.mockK)
-
-    androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
-    androidTestImplementation(Dependencies.Testing.AndroidXJunit)
 }

@@ -10,12 +10,11 @@ java {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
-    implementation(libs.orgJetbrainsKotlin.kotlinxCoroutinesCore)
+    implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
-    testImplementation(Dependencies.Testing.Coroutines.test)
+    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
 
-    testImplementation(Dependencies.Testing.junitJupiterEngine)
-    testImplementation(Dependencies.Testing.mockK)
+    testImplementation(libs.bundles.testing.jupiterMockK)
 }
 
 tasks.test {
