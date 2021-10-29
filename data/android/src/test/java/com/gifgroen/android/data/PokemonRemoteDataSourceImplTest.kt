@@ -8,8 +8,11 @@ import com.gifgroen.domain.entities.Pokemon
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -34,8 +37,9 @@ class PokemonRemoteDataSourceImplTest {
         clearAllMocks()
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `getPokemon() returns expected list of Pokemon Entity`() {
+    fun `getPokemon() returns expected list of Pokemon Entity`() = runBlockingTest {
         val baseLink = "http://pokeapi.co/api/v2/pokemon/"
         val url = "$baseLink${pokemon.id}"
 
@@ -43,86 +47,74 @@ class PokemonRemoteDataSourceImplTest {
         val resultList = listOf(resource)
         val result = NamedApiResult(resultList.size, "", "", resultList)
 
-        every {
-            api.listPokemon()
-        } returns Single.just(result)
+        coEvery {
+            api.listPokemonAsync()
+        } returns result
 
-        val testSubscriber = subject.getPokemon().test()
+        val it = subject.getPokemonAsync()
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertNoErrors()
-        testSubscriber.assertComplete()
-        testSubscriber.assertValue {
-            it.size == 1 && it.first() == pokemon
-        }
+        assertTrue(it.size == 1  && it.first() == pokemon)
 
-        verify(exactly = 1) {
-            api.listPokemon()
+        coVerify(exactly = 1) {
+            api.listPokemonAsync()
         }
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `getPokemon() returns empty list of Pokemon`() {
+    fun `getPokemon() returns empty list of Pokemon`() = runBlockingTest {
         val resultList = emptyList<NamedApiResource>()
         val result = NamedApiResult(resultList.size, "", "", resultList)
 
-        every {
-            api.listPokemon()
-        } returns Single.just(result)
+        coEvery {
+            api.listPokemonAsync()
+        } returns result
 
-        val testSubscriber = subject.getPokemon().test()
+        val testResult = subject.getPokemonAsync()
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertNoErrors()
-        testSubscriber.assertComplete()
-        testSubscriber.assertValue {
-            it.isEmpty()
-        }
+        assertTrue(testResult.isEmpty())
 
-        verify(exactly = 1) {
-            api.listPokemon()
+        coVerify(exactly = 1) {
+            api.listPokemonAsync()
         }
         confirmVerified(api)
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `getPokemon() returns Empty object`() {
+    fun `getPokemon() returns Empty object`() = runBlockingTest {
         val result = NamedApiResult(0, "", "", emptyList())
 
-        every {
-            api.listPokemon()
-        } returns Single.just(result)
+        coEvery {
+            api.listPokemonAsync()
+        } returns result
 
-        val testSubscriber = subject.getPokemon().test()
+        val testResult = subject.getPokemonAsync()
+        assertTrue(testResult.isEmpty())
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertNoErrors()
-        testSubscriber.assertComplete()
-        testSubscriber.assertValue {
-            it.isEmpty()
-        }
-
-        verify(exactly = 1) {
-            api.listPokemon()
+        coVerify(exactly = 1) {
+            api.listPokemonAsync()
         }
         confirmVerified(api)
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `getPokemon() throws Error`() {
-        every {
-            api.listPokemon()
-        } returns Single.error(Throwable("An error occurred!"))
+    fun `getPokemon() throws Error`() = runBlockingTest {
+        coEvery {
+            api.listPokemonAsync()
+        } throws Throwable("An error occurred!")
 
-        val subject = subject.getPokemon().test()
+        val exception = try {
+            subject.getPokemonAsync()
+            null
+        } catch(t: Throwable) {
+            t
+        }
+        assertEquals(exception?.message, "An error ocurred!")
 
-        subject.hasSubscription()
-        subject.assertError(Throwable::class.java)
-        subject.assertNotComplete()
-        subject.assertNoValues()
-
-        verify(exactly = 1) {
-            api.listPokemon()
+        coVerify(exactly = 1) {
+            api.listPokemonAsync()
         }
         confirmVerified(api)
     }

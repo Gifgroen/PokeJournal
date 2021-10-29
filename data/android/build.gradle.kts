@@ -5,14 +5,11 @@ plugins {
 }
 
 android {
-    compileSdk = AndroidConfig.sdkVersion
+    compileSdk = appConfig.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = AndroidConfig.minSdkVersion
-        targetSdk = AndroidConfig.sdkVersion
-
-//        versionCode = AndroidConfig.versionCode
-//        versionName = AndroidConfig.versionName
+        minSdk = appConfig.versions.minSdk.get().toInt()
+        targetSdk = appConfig.versions.targetSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -39,16 +36,14 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    implementation(kotlin(Dependencies.Kotlin.stdlib, Dependencies.Kotlin.version))
-    implementation(Dependencies.Rx.rxKotlin)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
     // Networking
-    implementation(Dependencies.Data.retrofit)
-    implementation(Dependencies.Data.retrofitConverterMoshi)
-    implementation(Dependencies.Data.retrofitAdapterRxJava)
+    implementation(libs.bundles.retrofitRxMoshi)
 
     // Testing
-    testImplementation(Dependencies.Testing.junitJupiterEngine)
-    testImplementation(Dependencies.Testing.mockK)
-    androidTestImplementation(Dependencies.Testing.AndroidXJunit)
-    androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
+    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
+    testImplementation(libs.bundles.testing.jupiterMockK)
+
+    androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
 }

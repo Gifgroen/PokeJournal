@@ -1,17 +1,16 @@
 package com.gifgroen.android.data
 
 import android.net.Uri
-import android.util.Log
 import com.gifgroen.android.api.PokeApi
 import com.gifgroen.domain.data.PokemonDataSource
 import com.gifgroen.domain.entities.Pokemon
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.*
 
 class PokemonRemoteDataSourceImpl(private val api: PokeApi) : PokemonDataSource {
 
-    override fun getPokemon(): Single<List<Pokemon>> {
-        return api.listPokemon()
-            .flattenAsObservable { it.results }
+    override suspend fun getPokemonAsync(): List<Pokemon> {
+        val pokemonList = api.listPokemonAsync()
+        return pokemonList.results
             .map {
                 /**
                  * TODO: add one-of mapper class
@@ -19,13 +18,10 @@ class PokemonRemoteDataSourceImpl(private val api: PokeApi) : PokemonDataSource 
                 val i = Uri.parse(it.url).lastPathSegment?.toInt() ?: -1
                 Pokemon(i, it.name, "")
             }
-            .toList()
     }
 
-    override fun getPokemon(id: Int): Single<Pokemon> {
-        return api.getPokemon(id)
-            .map {
-                Pokemon(it.id, it.name, it.sprite())
-            }
+    override suspend fun getPokemonAsync(id: Int): Pokemon {
+        val result = withContext(Dispatchers.IO) { api.getPokemonAsync(id) }
+        return Pokemon(result.id, result.name, result.sprite())
     }
 }

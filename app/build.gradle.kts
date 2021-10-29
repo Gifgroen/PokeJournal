@@ -5,15 +5,15 @@ plugins {
 }
 
 android {
-    compileSdk = AndroidConfig.sdkVersion
+    compileSdk = appConfig.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = AndroidConfig.appId
-        minSdk = AndroidConfig.minSdkVersion
-        targetSdk = AndroidConfig.sdkVersion
+        applicationId = "com.gifgroen.pokejournal"
+        minSdk = appConfig.versions.minSdk.get().toInt()
+        targetSdk = appConfig.versions.targetSdk.get().toInt()
 
-        versionCode = AndroidConfig.versionCode
-        versionName = AndroidConfig.versionName
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,58 +38,52 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
-        useIR = true
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Dependencies.Compose.extensionVersion
+        kotlinCompilerExtensionVersion = appConfig.versions.compose.extensionVersion.get()
     }
 }
 
 dependencies {
-    implementation(project(":domain"))
     implementation(project(":data:android"))
+    implementation(project(":domain"))
 
-    implementation(Dependencies.Di.dagger)
-    kapt(Dependencies.Di.daggerCompiler)
+    implementation(libs.kotlin.stdlib)
 
-    implementation(Dependencies.AndroidX.lifecycleRuntimeKtx)
+    // Compose
+    implementation("androidx.activity:activity-compose:1.4.0")
+    implementation("androidx.compose.foundation:foundation:${appConfig.versions.compose.extensionVersion.get()}")
+    // Compose Material
+    implementation("androidx.compose.material:material-icons-core:${appConfig.versions.compose.extensionVersion.get()}")
+    implementation("androidx.compose.material:material-icons-extended:${appConfig.versions.compose.extensionVersion.get()}")
+    implementation("androidx.compose.material:material:${appConfig.versions.compose.extensionVersion.get()}")
+    // Compose RxJava runtime
+    implementation("androidx.compose.runtime:runtime-rxjava3:${appConfig.versions.compose.extensionVersion.get()}")
+    // Compose UI
+    implementation("androidx.compose.ui:ui-tooling:${appConfig.versions.compose.extensionVersion.get()}")
+    implementation("androidx.compose.ui:ui:${appConfig.versions.compose.extensionVersion.get()}")
+    // Compose VM Lifecycle
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
 
-    implementation(kotlin(Dependencies.Kotlin.stdlib, Dependencies.Kotlin.version))
-    implementation(Dependencies.AndroidX.coreKtx)
-    implementation(Dependencies.AndroidX.appCompat)
-    implementation(Dependencies.Material.material)
-    implementation(Dependencies.AndroidX.constraintLayout)
-    // Rx
-    implementation(Dependencies.Rx.rxKotlin)
+    // AndroidX
+    implementation(libs.androidx.coreKtx)
+    implementation(libs.androidx.lifecycleRuntimeKtx)
     // Networking
-    implementation(Dependencies.Data.retrofit)
-    implementation(Dependencies.Data.retrofitConverterMoshi)
-    implementation(Dependencies.Data.retrofitAdapterRxJava)
+    implementation(libs.bundles.retrofitRxMoshi)
+    // DI
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+    // Google Material
+    implementation(libs.googleAndroidMaterial.material)
+    // Kotlin
+    implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
-    implementation("androidx.activity:activity-compose:1.3.1")
 
-    implementation("androidx.compose.ui:ui:${Dependencies.Compose.extensionVersion}")
-    // Tooling support (Previews, etc.)
-    implementation("androidx.compose.ui:ui-tooling:${Dependencies.Compose.extensionVersion}")
+    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
+    testImplementation(libs.bundles.testing.jupiterMockK)
 
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-rc01")
-
-    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation("androidx.compose.foundation:foundation:${Dependencies.Compose.extensionVersion}")
-    // Material Design
-    implementation("androidx.compose.material:material:${Dependencies.Compose.extensionVersion}")
-    // Material design icons
-    implementation("androidx.compose.material:material-icons-core:${Dependencies.Compose.extensionVersion}")
-    implementation("androidx.compose.material:material-icons-extended:${Dependencies.Compose.extensionVersion}")
-    // Integration with observables
-    implementation("androidx.compose.runtime:runtime-rxjava3:${Dependencies.Compose.extensionVersion}")
-
+    androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
     // UI Tests
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Dependencies.Compose.extensionVersion}")
-
-    testImplementation(Dependencies.Testing.junitJupiterEngine)
-    testImplementation(Dependencies.Testing.mockK)
-    androidTestImplementation(Dependencies.Testing.AndroidXJunit)
-    androidTestImplementation(Dependencies.Testing.AndroidXEspressoCore)
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${appConfig.versions.compose.extensionVersion.get()}")
 }

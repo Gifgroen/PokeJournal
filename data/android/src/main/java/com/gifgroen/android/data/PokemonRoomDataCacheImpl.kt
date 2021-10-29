@@ -10,27 +10,27 @@ class PokemonRoomDataCacheImpl(
     val cache: List<Pokemon> = emptyList()
 ) : PokemonDataCache {
 
-    override fun read(): Observable<List<Pokemon>> {
-        TODO("Not yet implemented")
-    }
-
-    override fun create(pokemon: Pokemon): Completable {
-        TODO("Not yet implemented")
-    }
-
-    override fun read(id: Int): Single<Pokemon> {
-        TODO("Not yet implemented")
-    }
-
-    override fun update(pokemon: Pokemon): Completable {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(pokemon: Pokemon): Completable {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(id: Int): Completable {
-        TODO("Not yet implemented")
-    }
+//    override fun read(): Observable<List<Pokemon>> {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun create(pokemon: Pokemon): Completable {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun read(id: Int): Single<Pokemon> {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun update(pokemon: Pokemon): Completable {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun delete(pokemon: Pokemon): Completable {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun delete(id: Int): Completable {
+//        TODO("Not yet implemented")
+//    }
 }

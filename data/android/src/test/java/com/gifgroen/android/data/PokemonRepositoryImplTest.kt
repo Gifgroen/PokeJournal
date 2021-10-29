@@ -4,14 +4,15 @@ import com.gifgroen.domain.data.PokemonDataCache
 import com.gifgroen.domain.data.PokemonDataSource
 import com.gifgroen.domain.data.PokemonRepository
 import com.gifgroen.domain.entities.Pokemon
-import io.mockk.Called
-import io.mockk.clearAllMocks
+import io.mockk.*
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import io.mockk.verify
 import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -39,46 +40,45 @@ class PokemonRepositoryImplTest {
         clearAllMocks()
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `getPokemon() returns expected Entity`() {
-        every {
-            remoteDataStore.getPokemon()
-        } returns Single.just(listOf(pokemon))
+    fun `getPokemon() returns expected Entity`() = runBlockingTest {
+        coEvery {
+            remoteDataStore.getPokemonAsync()
+        } returns listOf(pokemon)
 
-        val testSubscriber = subject.getPokemon().test()
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertNoErrors()
-        testSubscriber.assertComplete()
-        testSubscriber.assertValue {
-            it.size == 1 && it.first() == pokemon
+        val testResult = subject.getPokemonAsync()
+
+        Assertions.assertTrue(testResult.size == 1 && testResult.first() == pokemon)
+
+        coVerify(exactly = 1) {
+            remoteDataStore.getPokemonAsync()
         }
-
-        verify(exactly = 1) {
-            remoteDataStore.getPokemon()
-        }
-        verify { localDataCache.create(any()) wasNot Called }
-        verify { localDataCache.read(any()) wasNot Called }
-        verify { localDataCache.update(any()) wasNot Called }
-        verify(exactly = 0) { localDataCache.delete(10) }
-        verify(exactly = 0) { localDataCache.delete(pokemon) }
+//        verify { localDataCache.create(any()) wasNot Called }
+//        verify { localDataCache.read(any()) wasNot Called }
+//        verify { localDataCache.update(any()) wasNot Called }
+//        verify(exactly = 0) { localDataCache.delete(10) }
+//        verify(exactly = 0) { localDataCache.delete(pokemon) }
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `getPokemon() throws Error`() {
-        every {
-            remoteDataStore.getPokemon()
-        } returns Single.error(Throwable("An error occurred"))
+    fun `getPokemon() throws Error`() = runBlockingTest {
+        coEvery {
+            remoteDataStore.getPokemonAsync()
+        } throws Throwable("An error occurred")
 
-        val testSubscriber = subject.getPokemon().test()
+        val exception = try {
+            subject.getPokemonAsync()
+            null
+        } catch (t: Throwable) {
+            t
+        }
+        Assertions.assertEquals(exception?.message, "An error occurred")
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertError(Throwable::class.java)
-        testSubscriber.assertNotComplete()
-        testSubscriber.assertNoValues()
-
-        verify(exactly = 1) {
-            remoteDataStore.getPokemon()
+        coVerify(exactly = 1) {
+            remoteDataStore.getPokemonAsync()
         }
     }
 }

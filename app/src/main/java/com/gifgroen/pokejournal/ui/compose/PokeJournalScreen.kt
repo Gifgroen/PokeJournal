@@ -8,9 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.rxjava3.subscribeAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.gifgroen.domain.entities.Pokemon
@@ -20,10 +18,11 @@ import com.gifgroen.pokejournal.viewmodel.ListPokemonViewModel
 fun PokeJournalScreen(
     viewModel: ListPokemonViewModel
 ) {
-    val data = viewModel.getPokemon()
-        .subscribeAsState(initial = emptyList())
+    val data = remember { viewModel.pokemonListFlow }
+    val state = data.collectAsState()
+    viewModel.refresh()
     PokemonListing(
-        state = data,
+        state = state,
         modifier = Modifier.fillMaxSize()
     ) { pokemon ->
         Log.e("PokeJournalScreen", "Clicked $pokemon")
@@ -32,8 +31,8 @@ fun PokeJournalScreen(
 
 @Composable
 internal fun PokemonListing(
-    modifier: Modifier = Modifier,
     state: State<List<Pokemon>>,
+    modifier: Modifier = Modifier,
     onItemClick: (Pokemon) -> Unit
 ) {
     LazyColumn {
@@ -54,9 +53,14 @@ internal fun PokemonItem(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier.clickable(onClick = onItemClick).padding(16.dp)
+        modifier = modifier
+            .clickable(onClick = onItemClick)
+            .padding(16.dp)
     ) {
-        Text(text = "${item.id}")
+        Text(
+            text = "${item.id}",
+            modifier = Modifier.padding(horizontal = 4.dp)
+        )
         Text(text = item.name)
     }
 }

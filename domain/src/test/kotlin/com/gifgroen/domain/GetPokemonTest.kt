@@ -1,16 +1,21 @@
 package com.gifgroen.domain
 
-import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.domain.data.PokemonRepository
+import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.domain.usecases.GetPokemonUseCase
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import java.lang.NumberFormatException
 
 @ExtendWith(MockKExtension::class)
 class GetPokemonTest {
@@ -32,39 +37,39 @@ class GetPokemonTest {
         clearAllMocks()
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `getPokemon returns expected Entity`() {
-        every {
-            pokemonRepository.getPokemon(1)
-        } returns Single.just(pokemon)
+    fun `getPokemon returns expected Entity`() = runBlockingTest {
+        coEvery {
+            pokemonRepository.getPokemonAsync(1)
+        } returns pokemon
 
-        val testSubscriber = subject.getPokemon(1).test()
+        val result = subject.getPokemonAsync(1)
+        assert(result == pokemon)
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertValue(pokemon)
-        testSubscriber.assertComplete()
-        testSubscriber.assertNoErrors()
-
-        verify(exactly = 1) {
-            pokemonRepository.getPokemon(1)
+        coVerify(exactly = 1) {
+            pokemonRepository.getPokemonAsync(1)
         }
         confirmVerified(pokemonRepository)
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `getPokemon returns Error`() {
-        every {
-            pokemonRepository.getPokemon(1)
-        } returns Single.error(Throwable())
+    fun `getPokemon returns Error`() = runBlockingTest {
+        coEvery {
+            pokemonRepository.getPokemonAsync(1)
+        } throws Exception("Error ocurred")
 
-        val testSubscriber = subject.getPokemon(1).test()
+        val exception = try {
+            subject.getPokemonAsync(1)
+            null
+        } catch (exception: Exception){
+            exception
+        }
+        Assertions.assertEquals(exception?.message, "Error ocurred")
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertNoValues()
-        testSubscriber.assertNotComplete()
-
-        verify(exactly = 1) {
-            pokemonRepository.getPokemon(1)
+        coVerify(exactly = 1) {
+            pokemonRepository.getPokemonAsync(1)
         }
         confirmVerified(pokemonRepository)
     }

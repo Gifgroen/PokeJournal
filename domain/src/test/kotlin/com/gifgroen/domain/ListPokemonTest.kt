@@ -3,14 +3,15 @@ package com.gifgroen.domain
 import com.gifgroen.domain.data.PokemonRepository
 import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.domain.usecases.ListPokemonUseCase
-import io.mockk.clearAllMocks
-import io.mockk.confirmVerified
-import io.mockk.every
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
-import io.mockk.verify
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -33,66 +34,59 @@ class ListPokemonTest {
         clearAllMocks()
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `listPokemon returns expected list of Entity`() {
+    fun `listPokemon returns expected list of Entity`() = runBlockingTest {
         val data: List<Pokemon> = listOf(
             Pokemon(1, "bulbasaur")
         )
-        every {
-            pokemonRepository.getPokemon()
-        } returns Single.just(data)
+        coEvery {
+            pokemonRepository.getPokemonAsync()
+        } returns data
 
-        val testSubscriber = subject.getPokemon()
-            .test()
+        val result = subject.getPokemonAsync()
+        assert(data == result)
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertResult(data)
-        testSubscriber.assertComplete()
-        testSubscriber.assertNoErrors()
-
-        verify(exactly = 1) {
-            pokemonRepository.getPokemon()
+        coVerify(exactly = 1) {
+            pokemonRepository.getPokemonAsync()
         }
         confirmVerified(pokemonRepository)
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `listPokemon returns empty list of Entity`() {
+    fun `listPokemon returns empty list of Entity`() = runBlockingTest {
         val emptyList: List<Pokemon> = emptyList()
-        every {
-            pokemonRepository.getPokemon()
-        } returns Single.just(emptyList)
+        coEvery {
+            pokemonRepository.getPokemonAsync()
+        } returns emptyList
 
-        val testSubscriber = subject.getPokemon()
-            .test()
+        val result = subject.getPokemonAsync()
+        Assertions.assertTrue(result.isEmpty())
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertResult(emptyList)
-        testSubscriber.assertComplete()
-        testSubscriber.assertNoErrors()
-
-        verify(exactly = 1) {
-            pokemonRepository.getPokemon()
+        coVerify(exactly = 1) {
+            pokemonRepository.getPokemonAsync()
         }
         confirmVerified(pokemonRepository)
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun `listPokemon returns Error`() {
-        every {
-            pokemonRepository.getPokemon()
-        } returns Single.error(Throwable())
+    fun `listPokemon returns Error`() = runBlockingTest {
+        coEvery {
+            pokemonRepository.getPokemonAsync()
+        } throws Throwable("getPokemonAsync() failed")
 
-        val testSubscriber = subject.getPokemon()
-            .test()
+        val exception = try {
+            subject.getPokemonAsync()
+            null
+        } catch (exception: Throwable){
+            exception
+        }
+        Assertions.assertEquals(exception?.message, "getPokemonAsync() failed")
 
-        testSubscriber.hasSubscription()
-        testSubscriber.assertNoValues()
-        testSubscriber.assertNotComplete()
-        testSubscriber.assertError(Throwable::class.java)
-
-        verify(exactly = 1) {
-            pokemonRepository.getPokemon()
+        coVerify(exactly = 1) {
+            pokemonRepository.getPokemonAsync()
         }
         confirmVerified(pokemonRepository)
     }
