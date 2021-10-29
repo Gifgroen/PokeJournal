@@ -41,7 +41,7 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Dependencies.Compose.extensionVersion
+        kotlinCompilerExtensionVersion = appConfig.versions.compose.extensionVersion.get()
     }
 }
 
@@ -53,36 +53,34 @@ dependencies {
 
     // Compose
     implementation("androidx.activity:activity-compose:1.4.0")
-    implementation("androidx.compose.foundation:foundation:${Dependencies.Compose.extensionVersion}")
+    implementation("androidx.compose.foundation:foundation:${appConfig.versions.compose.extensionVersion.get()}")
     // Compose Material
-    implementation("androidx.compose.material:material-icons-core:${Dependencies.Compose.extensionVersion}")
-    implementation("androidx.compose.material:material-icons-extended:${Dependencies.Compose.extensionVersion}")
-    implementation("androidx.compose.material:material:${Dependencies.Compose.extensionVersion}")
+    implementation("androidx.compose.material:material-icons-core:${appConfig.versions.compose.extensionVersion.get()}")
+    implementation("androidx.compose.material:material-icons-extended:${appConfig.versions.compose.extensionVersion.get()}")
+    implementation("androidx.compose.material:material:${appConfig.versions.compose.extensionVersion.get()}")
     // Compose RxJava runtime
-    implementation("androidx.compose.runtime:runtime-rxjava3:${Dependencies.Compose.extensionVersion}")
+    implementation("androidx.compose.runtime:runtime-rxjava3:${appConfig.versions.compose.extensionVersion.get()}")
     // Compose UI
-    implementation("androidx.compose.ui:ui-tooling:${Dependencies.Compose.extensionVersion}")
-    implementation("androidx.compose.ui:ui:${Dependencies.Compose.extensionVersion}")
+    implementation("androidx.compose.ui:ui-tooling:${appConfig.versions.compose.extensionVersion.get()}")
+    implementation("androidx.compose.ui:ui:${appConfig.versions.compose.extensionVersion.get()}")
     // Compose VM Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
 
     // AndroidX
-    implementation(Dependencies.AndroidX.appCompat)
-    implementation(Dependencies.AndroidX.constraintLayout)
-    implementation(Dependencies.AndroidX.coreKtx)
-    implementation(Dependencies.AndroidX.lifecycleRuntimeKtx)
+    implementation(libs.androidx.coreKtx)
+    implementation(libs.androidx.lifecycleRuntimeKtx)
     // Networking
     implementation(libs.bundles.retrofitRxMoshi)
     // DI
-    implementation(libs.dagger.dagger)
-    kapt(libs.dagger.daggerCompiler)
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
     // Google Material
     implementation(libs.googleAndroidMaterial.material)
     // Kotlin
     implementation(libs.orgJetbrainsKotlin.kotlinxCoroutinesCore)
 
     // UI Tests
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Dependencies.Compose.extensionVersion}")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${appConfig.versions.compose.extensionVersion.get()}")
 
     testImplementation(Dependencies.Testing.Coroutines.test)
     testImplementation(Dependencies.Testing.junitJupiterEngine)

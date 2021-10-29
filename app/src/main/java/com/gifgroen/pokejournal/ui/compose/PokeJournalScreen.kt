@@ -31,8 +31,8 @@ fun PokeJournalScreen(
 
 @Composable
 internal fun PokemonListing(
-    modifier: Modifier = Modifier,
     state: State<List<Pokemon>>,
+    modifier: Modifier = Modifier,
     onItemClick: (Pokemon) -> Unit
 ) {
     LazyColumn {
@@ -57,7 +57,10 @@ internal fun PokemonItem(
             .clickable(onClick = onItemClick)
             .padding(16.dp)
     ) {
-        Text(text = "${item.id}")
+        Text(
+            text = "${item.id}",
+            modifier = Modifier.padding(horizontal = 4.dp)
+        )
         Text(text = item.name)
     }
 }
