@@ -41,7 +41,7 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = appConfig.versions.compose.extensionVersion.get()
+        kotlinCompilerExtensionVersion = libs.versions.compose.extension.get()
     }
 }
 
@@ -52,23 +52,15 @@ dependencies {
     implementation(libs.kotlin.stdlib)
 
     // Compose
-    implementation("androidx.activity:activity-compose:1.4.0")
-    implementation("androidx.compose.foundation:foundation:${appConfig.versions.compose.extensionVersion.get()}")
-    // Compose Material
-    implementation("androidx.compose.material:material-icons-core:${appConfig.versions.compose.extensionVersion.get()}")
-    implementation("androidx.compose.material:material-icons-extended:${appConfig.versions.compose.extensionVersion.get()}")
-    implementation("androidx.compose.material:material:${appConfig.versions.compose.extensionVersion.get()}")
-    // Compose RxJava runtime
-    implementation("androidx.compose.runtime:runtime-rxjava3:${appConfig.versions.compose.extensionVersion.get()}")
-    // Compose UI
-    implementation("androidx.compose.ui:ui-tooling:${appConfig.versions.compose.extensionVersion.get()}")
-    implementation("androidx.compose.ui:ui:${appConfig.versions.compose.extensionVersion.get()}")
-    // Compose VM Lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
+    implementation(libs.androidx.activityCompose)
 
-    // AndroidX
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.bundles.androidx.compose.material)
+    implementation(libs.bundles.androidx.compose.ui)
     implementation(libs.androidx.coreKtx)
     implementation(libs.androidx.lifecycleRuntimeKtx)
+    // Compose VM Lifecycle
+    implementation(libs.androidx.compose.lifecycleViewModel)
     // Networking
     implementation(libs.bundles.retrofitRxMoshi)
     // DI
@@ -79,11 +71,10 @@ dependencies {
     // Kotlin
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
-
     testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
     testImplementation(libs.bundles.testing.jupiterMockK)
 
     androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
     // UI Tests
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${appConfig.versions.compose.extensionVersion.get()}")
+    androidTestImplementation(libs.androidx.compose.uiTest)
 }

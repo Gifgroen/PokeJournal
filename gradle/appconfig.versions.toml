@@ -2,4 +2,3 @@
 compileSdk = "31"
 minSdk = "21"
 targetSdk = "31"
-compose-extensionVersion = "1.0.4"
