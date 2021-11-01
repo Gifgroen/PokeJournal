@@ -24,8 +24,8 @@ androidx-compose-material = { module = "androidx.compose.material:material", ver
 androidx-compose-materialIconsCore = { module = "androidx.compose.material:material-icons-core", version.ref = "compose-extension"}
 androidx-compose-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-extension"}
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose-extension"}
-androidx-compose-uiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-extension"}
 androidx-compose-uiTest = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose-extension"}
+androidx-compose-uiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-extension"}
 androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 androidx-espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core"}
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }

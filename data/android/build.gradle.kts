@@ -36,14 +36,12 @@ android {
 dependencies {
     implementation(project(":domain"))
 
+    implementation(libs.bundles.retrofitRxMoshi)
     implementation(libs.kotlin.stdlib)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
-    // Networking
-    implementation(libs.bundles.retrofitRxMoshi)
 
-    // Testing
-    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
     testImplementation(libs.bundles.testing.jupiterMockK)
+    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
 
     androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
 }

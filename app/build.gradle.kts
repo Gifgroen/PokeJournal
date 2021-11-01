@@ -49,27 +49,19 @@ dependencies {
     implementation(project(":data:android"))
     implementation(project(":domain"))
 
-    implementation(libs.kotlin.stdlib)
-
-    // Compose
     implementation(libs.androidx.activityCompose)
-
     implementation(libs.androidx.compose.foundation)
-    implementation(libs.bundles.androidx.compose.material)
-    implementation(libs.bundles.androidx.compose.ui)
+    implementation(libs.androidx.compose.lifecycleViewModel)
     implementation(libs.androidx.coreKtx)
     implementation(libs.androidx.lifecycleRuntimeKtx)
-    // Compose VM Lifecycle
-    implementation(libs.androidx.compose.lifecycleViewModel)
-    // Networking
+    implementation(libs.bundles.androidx.compose.material)
+    implementation(libs.bundles.androidx.compose.ui)
     implementation(libs.bundles.retrofitRxMoshi)
-    // DI
     implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
-    // Google Material
     implementation(libs.googleAndroidMaterial.material)
-    // Kotlin
+    implementation(libs.kotlin.stdlib)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
+    kapt(libs.dagger.compiler)
 
     testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
     testImplementation(libs.bundles.testing.jupiterMockK)

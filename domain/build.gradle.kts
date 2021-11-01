@@ -12,9 +12,8 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
-    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
-
     testImplementation(libs.bundles.testing.jupiterMockK)
+    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
 }
 
 tasks.test {
