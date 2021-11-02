@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("de.mannodermaus.android-junit5")
 }
 
 android {
@@ -64,7 +65,9 @@ dependencies {
     kapt(libs.dagger.compiler)
 
     testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
-    testImplementation(libs.bundles.testing.jupiterMockK)
+    testRuntimeOnly(libs.junit.jupiterEngine)
+    testImplementation(libs.junit.jupiterApi)
+    testImplementation(libs.mockk)
 
     androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
     // UI Tests

@@ -111,7 +111,7 @@ class PokemonRemoteDataSourceImplTest {
         } catch(t: Throwable) {
             t
         }
-        assertEquals(exception?.message, "An error ocurred!")
+        assertEquals(exception?.message, "An error occurred!")
 
         coVerify(exactly = 1) {
             api.listPokemonAsync()

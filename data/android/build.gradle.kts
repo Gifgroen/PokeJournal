@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
+    id("de.mannodermaus.android-junit5")
 }
 
 android {
@@ -40,7 +41,10 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
-    testImplementation(libs.bundles.testing.jupiterMockK)
+    testRuntimeOnly(libs.junit.jupiterEngine)
+    testImplementation(libs.junit.jupiterApi)
+    testImplementation(libs.mockk)
+
     testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
 
     androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
