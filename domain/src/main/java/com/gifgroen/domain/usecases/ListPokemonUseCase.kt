@@ -1,11 +1,8 @@
 package com.gifgroen.domain.usecases
 
-import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.domain.data.PokemonRepository
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
+import com.gifgroen.domain.entities.Pokemon
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.withContext
 
 class ListPokemonUseCase(private val pokemonRepository: PokemonRepository) {
 

@@ -5,13 +5,19 @@ import androidx.lifecycle.viewModelScope
 import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.domain.usecases.GetPokemonUseCase
 import com.gifgroen.domain.usecases.ListPokemonUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 
-class ListPokemonViewModel(
-    private val listUseCase: ListPokemonUseCase,
-    private val getUseCase: GetPokemonUseCase
-) : ViewModel() {
+@HiltViewModel
+class ListPokemonViewModel @Inject constructor() : ViewModel() {
+
+    @Inject
+    lateinit var listUseCase: ListPokemonUseCase
+
+    @Inject
+    lateinit var getUseCase: GetPokemonUseCase
 
     val pokemonListFlow = MutableStateFlow<List<Pokemon>>(value = emptyList())
 

@@ -8,6 +8,7 @@ dagger = "2.39.1"
 daggerCompiler = "2.39.1"
 espresso-core = "3.3.0"
 googleAndroidMaterial-material = "1.2.1"
+hilt-viewmodel = "1.0.0-alpha03"
 junit-jupiter = "5.8.0"
 android-junit5 = "1.8.0.0"
 kotlin = "1.5.31"
@@ -30,12 +31,16 @@ androidx-compose-uiTooling = { module = "androidx.compose.ui:ui-tooling", versio
 androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 androidx-espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core"}
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
+androidx-hilt-lifecycleViewmodel = { module = "androidx.hilt:hilt-lifecycle-viewmodel", version.ref = "hilt-viewmodel"}
 androidx-lifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger"}
+dagger-hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger"}
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "daggerCompiler" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "daggerCompiler" }
 googleAndroidMaterial-material = { module = "com.google.android.material:material", version.ref = "googleAndroidMaterial-material"}
 gradlePlugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 gradlePlugin-androidJunit5 = { module = "de.mannodermaus.gradle.plugins:android-junit5", version.ref = "android-junit5"}
+gradlePlugin-hiltAndroid = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
 gradlePlugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 junit-jupiterApi = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
 junit-jupiterEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }

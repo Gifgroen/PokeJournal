@@ -34,7 +34,9 @@ class ListPokemonViewModelTest {
     @BeforeEach
     fun setUp() {
         Dispatchers.setMain(dispatcher)
-        subject = ListPokemonViewModel(listUseCase, getUseCase = getUseCase)
+        subject = ListPokemonViewModel( // TODO: Inject useCases or create constructor params again!
+            //listUseCase = listUseCase, getUseCase = getUseCase
+        )
     }
 
     @AfterEach

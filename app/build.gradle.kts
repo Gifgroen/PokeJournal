@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("de.mannodermaus.android-junit5")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -46,6 +47,11 @@ android {
     }
 }
 
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation(project(":data:android"))
     implementation(project(":domain"))
@@ -58,11 +64,14 @@ dependencies {
     implementation(libs.bundles.androidx.compose.material)
     implementation(libs.bundles.androidx.compose.ui)
     implementation(libs.bundles.retrofitRxMoshi)
-    implementation(libs.dagger)
+
+    implementation(libs.dagger.hilt)
+    implementation (libs.androidx.hilt.lifecycleViewmodel)
+    kapt(libs.dagger.hilt.compiler)
+
     implementation(libs.googleAndroidMaterial.material)
     implementation(libs.kotlin.stdlib)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
-    kapt(libs.dagger.compiler)
 
     testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
     testRuntimeOnly(libs.junit.jupiterEngine)

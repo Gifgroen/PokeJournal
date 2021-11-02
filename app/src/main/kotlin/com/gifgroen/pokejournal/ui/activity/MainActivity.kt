@@ -3,26 +3,23 @@ package com.gifgroen.pokejournal.ui.activity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import com.gifgroen.pokejournal.di.components.DaggerAppComponent
-import com.gifgroen.pokejournal.di.modules.ViewModelModule
+import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gifgroen.pokejournal.ui.compose.PokeJournalScreen
 import com.gifgroen.pokejournal.viewmodel.ListPokemonViewModel
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var viewModel: ListPokemonViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DaggerAppComponent.builder()
-            .viewModelModule(ViewModelModule(this))
-            .build()
-            .inject(this)
-
         setContent {
-            PokeJournalScreen(viewModel = viewModel)
+            val viewModel: ListPokemonViewModel = viewModel()
+            PokeJournalScreen(
+                state = viewModel.pokemonListFlow.collectAsState(initial = emptyList()),
+                onRefresh = { viewModel.refresh() }
+            )
         }
     }
 }

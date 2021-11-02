@@ -6,8 +6,12 @@ import com.gifgroen.domain.data.PokemonDataSource
 import com.gifgroen.domain.data.PokemonRepository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ViewModelComponent
 
-@Module(includes = [DataSourceModule::class])
+@Module
+@InstallIn(ActivityComponent::class, ViewModelComponent::class)
 class RepositoryModule {
 
     @Provides

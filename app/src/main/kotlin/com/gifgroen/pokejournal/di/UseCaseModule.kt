@@ -1,12 +1,15 @@
-package com.gifgroen.pokejournal.di.modules
+package com.gifgroen.pokejournal.di
 
 import com.gifgroen.domain.data.PokemonRepository
 import com.gifgroen.domain.usecases.GetPokemonUseCase
 import com.gifgroen.domain.usecases.ListPokemonUseCase
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 
-@Module(includes = [RepositoryModule::class])
+@Module
+@InstallIn(ViewModelComponent::class)
 class UseCaseModule {
 
     @Provides
@@ -18,5 +21,4 @@ class UseCaseModule {
     fun providesGetPokemon(repository: PokemonRepository): GetPokemonUseCase {
         return GetPokemonUseCase(repository)
     }
-
 }
