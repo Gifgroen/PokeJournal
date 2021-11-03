@@ -3,7 +3,6 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
       <module name="PokeJournal.app" target="11" />
-      <module name="PokeJournal.buildSrc" target="11" />
       <module name="PokeJournal.data.android" target="11" />
     </bytecodeTargetLevel>
   </component>

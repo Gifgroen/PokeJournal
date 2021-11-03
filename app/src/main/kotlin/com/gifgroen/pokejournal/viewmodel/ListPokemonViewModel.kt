@@ -11,13 +11,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class ListPokemonViewModel @Inject constructor() : ViewModel() {
-
-    @Inject
-    lateinit var listUseCase: ListPokemonUseCase
-
-    @Inject
-    lateinit var getUseCase: GetPokemonUseCase
+class ListPokemonViewModel @Inject constructor(
+    var getUseCase: GetPokemonUseCase, var listUseCase: ListPokemonUseCase
+) : ViewModel() {
 
     val pokemonListFlow = MutableStateFlow<List<Pokemon>>(value = emptyList())
 

@@ -16,9 +16,7 @@ import javax.inject.Named
 class NetworkModule {
 
     @Provides
-    fun providesPokeApi(retrofit: Retrofit): PokeApi {
-        return retrofit.create(PokeApi::class.java)
-    }
+    fun providesPokeApi(retrofit: Retrofit): PokeApi = retrofit.create(PokeApi::class.java)
 
     @Provides
     fun providesRetrofit(
@@ -35,9 +33,7 @@ class NetworkModule {
 
     @Provides
     @Named("baseUrl")
-    fun baseUrl(): String {
-        return "https://pokeapi.co/api/"
-    }
+    fun baseUrl(): String = "https://pokeapi.co/api/"
 
     @Provides
     fun providesOkHttpClient(): OkHttpClient = OkHttpClient()
