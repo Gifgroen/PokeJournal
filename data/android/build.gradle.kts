@@ -38,7 +38,6 @@ dependencies {
     implementation(project(":domain"))
 
     implementation(libs.bundles.retrofitRxMoshi)
-    implementation(libs.kotlin.stdlib)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
     testRuntimeOnly(libs.junit.jupiterEngine)

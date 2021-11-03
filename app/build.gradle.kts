@@ -70,7 +70,6 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
 
     implementation(libs.googleAndroidMaterial.material)
-    implementation(libs.kotlin.stdlib)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
     testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
