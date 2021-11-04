@@ -8,6 +8,7 @@ buildscript {
         classpath(libs.gradlePlugin.android)
         classpath(libs.gradlePlugin.kotlin)
         classpath(libs.gradlePlugin.androidJunit5)
+        classpath(libs.gradlePlugin.hiltAndroid)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

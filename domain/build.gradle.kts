@@ -9,7 +9,6 @@ java {
 }
 
 dependencies {
-    implementation(libs.kotlin.stdlib)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
     testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)

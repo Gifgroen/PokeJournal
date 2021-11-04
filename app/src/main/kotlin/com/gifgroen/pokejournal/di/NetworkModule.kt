@@ -1,21 +1,22 @@
-package com.gifgroen.pokejournal.di.modules
+package com.gifgroen.pokejournal.di
 
 import com.gifgroen.android.api.PokeApi
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ViewModelComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Named
 
 @Module
+@InstallIn(ActivityComponent::class, ViewModelComponent::class)
 class NetworkModule {
 
     @Provides
-    fun providesPokeApi(retrofit: Retrofit): PokeApi {
-        return retrofit.create(PokeApi::class.java)
-    }
+    fun providesPokeApi(retrofit: Retrofit): PokeApi = retrofit.create(PokeApi::class.java)
 
     @Provides
     fun providesRetrofit(
@@ -32,9 +33,7 @@ class NetworkModule {
 
     @Provides
     @Named("baseUrl")
-    fun baseUrl(): String {
-        return "https://pokeapi.co/api/"
-    }
+    fun baseUrl(): String = "https://pokeapi.co/api/"
 
     @Provides
     fun providesOkHttpClient(): OkHttpClient = OkHttpClient()
