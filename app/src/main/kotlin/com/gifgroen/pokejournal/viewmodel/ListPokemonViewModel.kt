@@ -12,12 +12,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListPokemonViewModel @Inject constructor(
-    var getUseCase: GetPokemonUseCase, var listUseCase: ListPokemonUseCase
+    val getUseCase: GetPokemonUseCase,
+    val listUseCase: ListPokemonUseCase
 ) : ViewModel() {
 
     val pokemonListFlow = MutableStateFlow<List<Pokemon>>(value = emptyList())
 
-    fun refresh() = viewModelScope.launch (Dispatchers.Default) { pokemonListFlow.value = getPokemonAsync().await() }
+    fun refresh() = viewModelScope.launch(Dispatchers.Default) {
+        pokemonListFlow.value = getPokemonAsync().await()
+    }
 
     private suspend fun getPokemonAsync(): Deferred<List<Pokemon>> = viewModelScope.async {
         val pokemonList = listUseCase.getPokemonAsync()
