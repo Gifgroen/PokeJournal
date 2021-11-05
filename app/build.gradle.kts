@@ -18,6 +18,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // 2) Connect JUnit 5 to the runner
+        testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
     buildFeatures {
         compose = true
@@ -45,6 +47,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.extension.get()
     }
+    packagingOptions {
+        pickFirst("META-INF/AL2.0")
+        pickFirst("META-INF/LGPL2.1")
+    }
 }
 
 // Allow references to generated code
@@ -64,20 +70,21 @@ dependencies {
     implementation(libs.bundles.androidx.compose.material)
     implementation(libs.bundles.androidx.compose.ui)
     implementation(libs.bundles.retrofitRxMoshi)
-
     implementation(libs.dagger.hilt)
-    implementation (libs.androidx.hilt.lifecycleViewmodel)
+    implementation(libs.androidx.hilt.lifecycleViewmodel)
     kapt(libs.dagger.hilt.compiler)
-
     implementation(libs.googleAndroidMaterial.material)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
-    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
-    testRuntimeOnly(libs.junit.jupiterEngine)
     testImplementation(libs.junit.jupiterApi)
     testImplementation(libs.mockk)
+    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
+    testRuntimeOnly(libs.junit.jupiterEngine)
 
-    androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
-    // UI Tests
     androidTestImplementation(libs.androidx.compose.uiTest)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
+    androidTestImplementation(libs.junit.jupiterApi)
+    androidTestImplementation(libs.mannodermaus.junit5.androidTestCore)
+    androidTestRuntimeOnly(libs.mannodermaus.junit5.androidTestRunner)
 }
