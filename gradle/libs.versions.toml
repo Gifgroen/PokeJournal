@@ -29,8 +29,9 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compos
 androidx-compose-uiTest = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose-extension"}
 androidx-compose-uiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-extension"}
 androidx-coreKtx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
-androidx-espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core"}
-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
+androidx-test-espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core"}
+androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-junit" }
 androidx-hilt-lifecycleViewmodel = { module = "androidx.hilt:hilt-lifecycle-viewmodel", version.ref = "hilt-viewmodel"}
 androidx-lifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger"}
@@ -52,7 +53,7 @@ retrofit-adapterRxJava = { module = "com.squareup.retrofit2:adapter-rxjava3", ve
 retrofit-converterMoshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
 [bundles]
-androidtesting-junitEspresso = ["androidx-espressoCore", "androidx-junit"]
+androidtesting-junitEspresso = ["androidx-test-espressoCore", "androidx-test-junit"]
 androidx-compose-material = ["androidx-compose-material", "androidx-compose-materialIconsCore", "androidx-compose-materialIconsExtended"]
 androidx-compose-ui = ["androidx-compose-ui",  "androidx-compose-uiTooling"]
 retrofitRxMoshi = ["retrofit", "retrofit-adapterRxJava", "retrofit-converterMoshi"]

@@ -18,6 +18,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // 2) Connect JUnit 5 to the runner
+        testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
     buildFeatures {
         compose = true
@@ -80,4 +82,12 @@ dependencies {
     androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
     // UI Tests
     androidTestImplementation(libs.androidx.compose.uiTest)
+
+    // 4) Jupiter API & Test Runner, if you don't have it already
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.junit.jupiterApi)
+
+    // 5) The instrumentation test companion libraries
+    androidTestImplementation("de.mannodermaus.junit5:android-test-core:1.3.0")
+    androidTestRuntimeOnly("de.mannodermaus.junit5:android-test-runner:1.3.0")
 }
