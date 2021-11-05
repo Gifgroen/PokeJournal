@@ -47,6 +47,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.extension.get()
     }
+    packagingOptions {
+        pickFirst("META-INF/AL2.0")
+        pickFirst("META-INF/LGPL2.1")
+    }
 }
 
 // Allow references to generated code
@@ -66,28 +70,21 @@ dependencies {
     implementation(libs.bundles.androidx.compose.material)
     implementation(libs.bundles.androidx.compose.ui)
     implementation(libs.bundles.retrofitRxMoshi)
-
     implementation(libs.dagger.hilt)
-    implementation (libs.androidx.hilt.lifecycleViewmodel)
+    implementation(libs.androidx.hilt.lifecycleViewmodel)
     kapt(libs.dagger.hilt.compiler)
-
     implementation(libs.googleAndroidMaterial.material)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
-    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
-    testRuntimeOnly(libs.junit.jupiterEngine)
     testImplementation(libs.junit.jupiterApi)
     testImplementation(libs.mockk)
+    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
+    testRuntimeOnly(libs.junit.jupiterEngine)
 
-    androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
-    // UI Tests
     androidTestImplementation(libs.androidx.compose.uiTest)
-
-    // 4) Jupiter API & Test Runner, if you don't have it already
     androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
     androidTestImplementation(libs.junit.jupiterApi)
-
-    // 5) The instrumentation test companion libraries
-    androidTestImplementation("de.mannodermaus.junit5:android-test-core:1.3.0")
-    androidTestRuntimeOnly("de.mannodermaus.junit5:android-test-runner:1.3.0")
+    androidTestImplementation(libs.mannodermaus.junit5.androidTestCore)
+    androidTestRuntimeOnly(libs.mannodermaus.junit5.androidTestRunner)
 }
