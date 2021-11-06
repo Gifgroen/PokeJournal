@@ -32,7 +32,7 @@ class PokemonRepositoryImplTest {
 
     @BeforeEach
     fun setUp() {
-        subject = PokemonRepositoryImpl(remoteDataStore, localDataCache)
+        subject = PokemonRepositoryImpl(remoteDataStore)
     }
 
     @AfterEach

@@ -8,26 +8,26 @@ class PokemonRoomDataCacheImpl(
 ) : PokemonDataCache {
 
     override fun read(): List<Pokemon> {
-//        TODO("Not yet implemented")
+        return emptyList()
     }
 
     override fun create(pokemon: Pokemon) {
-//        TODO("Not yet implemented")
+
     }
 
     override fun read(id: Int): Pokemon {
-//        TODO("Not yet implemented")
+        return Pokemon(0, "")
     }
 
     override fun update(pokemon: Pokemon) {
-//        TODO("Not yet implemented")
+
     }
 
     override fun delete(pokemon: Pokemon) {
-//        TODO("Not yet implemented")
+
     }
 
     override fun delete(id: Int) {
-//        TODO("Not yet implemented")
+
     }
 }
