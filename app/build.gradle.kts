@@ -2,23 +2,22 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    id("de.mannodermaus.android-junit5")
     id("dagger.hilt.android.plugin")
+    id("de.mannodermaus.android-junit5")
 }
 
 android {
     compileSdk = appConfig.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.gifgroen.pokejournal"
         minSdk = appConfig.versions.minSdk.get().toInt()
         targetSdk = appConfig.versions.targetSdk.get().toInt()
 
+        applicationId = "com.gifgroen.pokejournal"
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        // 2) Connect JUnit 5 to the runner
         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
     buildFeatures {
@@ -48,8 +47,10 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.extension.get()
     }
     packagingOptions {
-        pickFirst("META-INF/AL2.0")
-        pickFirst("META-INF/LGPL2.1")
+        resources.pickFirsts.run {
+            add("META-INF/AL2.0")
+            add("META-INF/LGPL2.1")
+        }
     }
 }
 

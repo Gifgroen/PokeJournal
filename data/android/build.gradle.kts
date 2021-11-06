@@ -13,6 +13,8 @@ android {
         targetSdk = appConfig.versions.targetSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
+
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -34,23 +36,20 @@ android {
     }
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-}
-
 dependencies {
     implementation(project(":domain"))
 
     implementation(libs.bundles.retrofitRxMoshi)
     implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
 
-    testRuntimeOnly(libs.junit.jupiterEngine)
     testImplementation(libs.junit.jupiterApi)
     testImplementation(libs.mockk)
-
     testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
+    testRuntimeOnly(libs.junit.jupiterEngine)
 
+    androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.bundles.androidtesting.junitEspresso)
+    androidTestImplementation(libs.junit.jupiterApi)
+    androidTestImplementation(libs.mannodermaus.junit5.androidTestCore)
+    androidTestRuntimeOnly(libs.mannodermaus.junit5.androidTestRunner)
 }
