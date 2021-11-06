@@ -4,6 +4,7 @@ plugins {
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
     id("de.mannodermaus.android-junit5")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 android {
@@ -50,6 +51,17 @@ android {
         resources.pickFirsts.run {
             add("META-INF/AL2.0")
             add("META-INF/LGPL2.1")
+        }
+    }
+}
+
+detekt {
+    source = files("src/main/java", "src/main/kotlin")
+    config = rootProject.files("build-config/detekt.yml")
+    buildUponDefaultConfig = true
+    reports {
+        sarif {
+            enabled = true
         }
     }
 }

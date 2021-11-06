@@ -17,8 +17,5 @@ class RepositoryModule {
     @Provides
     fun providesPokemonRepository(
         dataSource: PokemonDataSource,
-        dataCache: PokemonDataCache
-    ): PokemonRepository {
-        return PokemonRepositoryImpl(dataSource, dataCache)
-    }
+    ): PokemonRepository = PokemonRepositoryImpl(dataSource)
 }

@@ -6,8 +6,12 @@ import com.gifgroen.domain.entities.Pokemon
 import com.gifgroen.domain.usecases.GetPokemonUseCase
 import com.gifgroen.domain.usecases.ListPokemonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.awaitAll
 import javax.inject.Inject
 
 @HiltViewModel

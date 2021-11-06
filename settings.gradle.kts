@@ -12,8 +12,8 @@ dependencyResolutionManagement {
     }
 }
 
-//rootProject.name = "PokeJournal"
-//rootProject.buildFileName = "build.gradle.kts"
+rootProject.name = "PokeJournal"
+rootProject.buildFileName = "build.gradle.kts"
 
 include(":domain")
 include(":data:android")
