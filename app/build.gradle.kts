@@ -55,6 +55,17 @@ android {
     }
 }
 
+detekt {
+    source = files("src/main/java", "src/main/kotlin")
+    config = rootProject.files("build-config/detekt.yml")
+    buildUponDefaultConfig = true
+    reports {
+        sarif {
+            enabled = true
+        }
+    }
+}
+
 // Allow references to generated code
 kapt {
     correctErrorTypes = true

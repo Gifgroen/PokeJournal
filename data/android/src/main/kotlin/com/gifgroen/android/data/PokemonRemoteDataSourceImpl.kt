@@ -4,7 +4,8 @@ import android.net.Uri
 import com.gifgroen.android.api.PokeApi
 import com.gifgroen.domain.data.PokemonDataSource
 import com.gifgroen.domain.entities.Pokemon
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class PokemonRemoteDataSourceImpl(private val api: PokeApi) : PokemonDataSource {
 

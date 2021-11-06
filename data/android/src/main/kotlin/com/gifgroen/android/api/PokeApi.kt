@@ -2,7 +2,6 @@ package com.gifgroen.android.api
 
 import com.gifgroen.android.entity.NamedApiResult
 import com.gifgroen.android.entity.PokemonResult
-import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
 

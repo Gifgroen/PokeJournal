@@ -13,12 +13,10 @@ import dagger.hilt.android.components.ViewModelComponent
 class UseCaseModule {
 
     @Provides
-    fun providesListPokemon(repository: PokemonRepository): ListPokemonUseCase {
-        return ListPokemonUseCase(repository)
-    }
+    fun providesListPokemon(repository: PokemonRepository): ListPokemonUseCase =
+        ListPokemonUseCase(repository)
 
     @Provides
-    fun providesGetPokemon(repository: PokemonRepository): GetPokemonUseCase {
-        return GetPokemonUseCase(repository)
-    }
+    fun providesGetPokemon(repository: PokemonRepository): GetPokemonUseCase =
+        GetPokemonUseCase(repository)
 }

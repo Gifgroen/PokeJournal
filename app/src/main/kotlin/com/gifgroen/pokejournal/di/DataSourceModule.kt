@@ -16,12 +16,8 @@ import dagger.hilt.android.components.ViewModelComponent
 class DataSourceModule {
 
     @Provides
-    fun providesDataSource(api: PokeApi): PokemonDataSource {
-        return PokemonRemoteDataSourceImpl(api)
-    }
+    fun providesDataSource(api: PokeApi): PokemonDataSource = PokemonRemoteDataSourceImpl(api)
 
     @Provides
-    fun providesDataCache(): PokemonDataCache {
-        return PokemonRoomDataCacheImpl()
-    }
+    fun providesDataCache(): PokemonDataCache = PokemonRoomDataCacheImpl()
 }

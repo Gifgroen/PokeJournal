@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("de.mannodermaus.android-junit5")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 android {
@@ -33,6 +34,17 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+detekt {
+    source = files("src/main/java", "src/main/kotlin")
+    config = rootProject.files("build-config/detekt.yml")
+    buildUponDefaultConfig = true
+    reports {
+        sarif {
+            enabled = true
+        }
     }
 }
 
