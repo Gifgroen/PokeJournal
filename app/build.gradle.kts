@@ -4,6 +4,7 @@ plugins {
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
     id("de.mannodermaus.android-junit5")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 android {

@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gifgroen.domain.entities.Pokemon
-import kotlinx.coroutines.flow.*
 
 @Composable
 fun PokeJournalScreen(
@@ -71,9 +74,9 @@ fun PokeJournalScreenPreview() {
     val pokemonFlow: MutableState<List<Pokemon>> = remember {
         mutableStateOf(
             listOf(
-                Pokemon(1, "Foo"),
-                Pokemon(2, "Bar"),
-                Pokemon(3, "Baz")
+                Pokemon(id = 1, name = "Foo"),
+                Pokemon(id = 2, name = "Bar"),
+                Pokemon(id = 3, name = "Baz")
             )
         )
     }
