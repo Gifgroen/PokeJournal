@@ -15,12 +15,12 @@ class PokemonRemoteDataSourceImpl(private val api: PokeApi) : PokemonDataSource 
             .map {
                 val file = File(it.url)
                 val id = file.nameWithoutExtension.toInt()
-                Pokemon(id = id, it.name, "")
+                Pokemon(id = id, name = it.name)
             }
     }
 
     override suspend fun getPokemonAsync(id: Int): Pokemon {
         val result = withContext(Dispatchers.IO) { api.getPokemonAsync(id) }
-        return Pokemon(result.id, result.name, result.sprite())
+        return Pokemon(id = result.id, name = result.name, sprite = result.sprite())
     }
 }
