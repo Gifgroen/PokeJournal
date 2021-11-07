@@ -1,11 +1,11 @@
 package com.gifgroen.android.data
 
-import android.net.Uri
 import com.gifgroen.android.api.PokeApi
 import com.gifgroen.domain.data.PokemonDataSource
 import com.gifgroen.domain.entities.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class PokemonRemoteDataSourceImpl(private val api: PokeApi) : PokemonDataSource {
 
@@ -13,11 +13,9 @@ class PokemonRemoteDataSourceImpl(private val api: PokeApi) : PokemonDataSource 
         val pokemonList = api.listPokemonAsync()
         return pokemonList.results
             .map {
-                /**
-                 * TODO: add one-of mapper class
-                 */
-                val i = Uri.parse(it.url).lastPathSegment?.toInt() ?: -1
-                Pokemon(i, it.name, "")
+                val file = File(it.url)
+                val id = file.nameWithoutExtension.toInt()
+                Pokemon(id = id, it.name, "")
             }
     }
 
