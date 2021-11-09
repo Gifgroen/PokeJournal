@@ -1,12 +1,12 @@
 plugins {
-    id("java-library")
     id("kotlin")
     id("io.gitlab.arturbosch.detekt")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+kotlin {
+    jvmToolchain {
+        version = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
