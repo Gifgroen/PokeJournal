@@ -16,5 +16,5 @@ rootProject.name = "PokeJournal"
 rootProject.buildFileName = "build.gradle.kts"
 
 include(":domain")
-include(":data:android")
 include(":app")
+include(":data:network")

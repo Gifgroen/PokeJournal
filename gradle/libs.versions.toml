@@ -14,11 +14,12 @@ junit-jupiter = "5.8.0"
 android-junit5 = "1.8.0.0"
 kotlin = "1.5.31"
 kotlinxCoroutines = "1.5.0"
+kotlinxSerializationJson = "1.3.0"
 lifecycleRuntimeKtx = "2.2.0"
 lifecycleViewmodelCompose = "2.4.0"
 mannodermaus-androidtest = "1.3.0"
 mockk = "1.10.2"
-retrofit = "2.9.0"
+ktor = "1.6.5"
 
 [libraries]
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose"}
@@ -46,19 +47,22 @@ gradlePlugin-androidJunit5 = { module = "de.mannodermaus.gradle.plugins:android-
 gradlePlugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt"}
 gradlePlugin-hiltAndroid = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
 gradlePlugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradlePlugin-kotlinSerialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 junit-jupiterApi = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
 junit-jupiterEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor"}
+ktor-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-ios = { module = "io.ktor:ktor-client-ios", version.ref = "ktor" }
 mannodermaus-junit5-androidTestCore = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "mannodermaus-androidtest" }
 mannodermaus-junit5-androidTestRunner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "mannodermaus-androidtest" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 orgJetbrainsKotlinx-kotlinxCoroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 orgJetbrainsKotlinx-kotlinxCoroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofit-adapterRxJava = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
-retrofit-converterMoshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+orgJetbrainsKotlinx-kotlinxSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 [bundles]
 androidtesting-junitEspresso = ["androidx-test-espressoCore", "androidx-test-junit"]
 androidx-compose-material = ["androidx-compose-material", "androidx-compose-materialIconsCore", "androidx-compose-materialIconsExtended"]
 androidx-compose-ui = ["androidx-compose-ui",  "androidx-compose-uiTooling"]
-retrofitRxMoshi = ["retrofit", "retrofit-adapterRxJava", "retrofit-converterMoshi"]

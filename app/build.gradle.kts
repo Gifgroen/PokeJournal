@@ -73,6 +73,7 @@ kapt {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(project(":data:network"))
 
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.compose.foundation)
@@ -81,7 +82,6 @@ dependencies {
     implementation(libs.androidx.lifecycleRuntimeKtx)
     implementation(libs.bundles.androidx.compose.material)
     implementation(libs.bundles.androidx.compose.ui)
-    implementation(libs.bundles.retrofitRxMoshi)
     implementation(libs.dagger.hilt)
     implementation(libs.androidx.hilt.lifecycleViewmodel)
     kapt(libs.dagger.hilt.compiler)
