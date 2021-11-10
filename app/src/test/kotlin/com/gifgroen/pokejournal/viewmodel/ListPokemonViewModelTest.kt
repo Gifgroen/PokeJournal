@@ -1,8 +1,8 @@
 package com.gifgroen.pokejournal.viewmodel
 
-import com.gifgroen.domain.entities.Pokemon
-import com.gifgroen.domain.usecases.GetPokemonUseCase
-import com.gifgroen.domain.usecases.ListPokemonUseCase
+import com.gifgroen.pokejournal.domain.entities.Pokemon
+import com.gifgroen.pokejournal.domain.usecases.GetPokemonUseCase
+import com.gifgroen.pokejournal.domain.usecases.ListPokemonUseCase
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
