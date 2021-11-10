@@ -1,8 +1,8 @@
 package com.gifgroen.pokejournal.di
 
 import com.gifgroen.android.data.PokemonRepositoryImpl
-import com.gifgroen.domain.data.PokemonDataSource
-import com.gifgroen.domain.data.PokemonRepository
+import com.gifgroen.pokejournal.domain.data.PokemonDataSource
+import com.gifgroen.pokejournal.domain.data.PokemonRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

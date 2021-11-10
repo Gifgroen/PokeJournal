@@ -3,7 +3,7 @@ package com.gifgroen.android.data
 import com.gifgroen.android.api.PokeApi
 import com.gifgroen.android.entity.NamedApiResource
 import com.gifgroen.android.entity.NamedApiResult
-import com.gifgroen.domain.data.PokemonDataSource
+import com.gifgroen.pokejournal.domain.data.PokemonDataSource
 import com.gifgroen.domain.entities.Pokemon
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
@@ -25,7 +25,7 @@ class PokemonRemoteDataSourceImplTest {
 
     private val pokemon = Pokemon(1, "bulbasaur")
 
-    private lateinit var subject: PokemonDataSource
+    private lateinit var subject: com.gifgroen.pokejournal.domain.data.PokemonDataSource
 
     @BeforeEach
     fun setUp() {

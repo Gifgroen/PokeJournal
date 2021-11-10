@@ -1,8 +1,8 @@
 package com.gifgroen.android.data
 
-import com.gifgroen.domain.data.PokemonDataSource
-import com.gifgroen.domain.data.PokemonRepository
-import com.gifgroen.domain.entities.Pokemon
+import com.gifgroen.pokejournal.domain.data.PokemonDataSource
+import com.gifgroen.pokejournal.domain.data.PokemonRepository
+import com.gifgroen.pokejournal.domain.entities.Pokemon
 
 class PokemonRepositoryImpl(
     private val remoteDataStore: PokemonDataSource

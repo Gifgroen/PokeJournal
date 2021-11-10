@@ -1,13 +1,14 @@
 package com.gifgroen.android.data
 
 import com.gifgroen.android.api.PokeApi
-import com.gifgroen.domain.data.PokemonDataSource
-import com.gifgroen.domain.entities.Pokemon
+import com.gifgroen.pokejournal.domain.data.PokemonDataSource
+import com.gifgroen.pokejournal.domain.entities.Pokemon
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
 
-class PokemonRemoteDataSourceImpl(private val api: PokeApi) : PokemonDataSource {
+class PokemonRemoteDataSourceImpl(private val api: PokeApi) :
+    PokemonDataSource {
 
     override suspend fun getPokemonAsync(): List<Pokemon> {
         val pokemonList = api.listPokemonAsync()

@@ -1,37 +1,55 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
-    id("kotlin")
-    id("io.gitlab.arturbosch.detekt")
+    kotlin("multiplatform")
+    id("com.android.library")
 }
 
 kotlin {
-    jvmToolchain {
-        version = JavaVersion.VERSION_1_8
+    android()
+
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
+        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        else -> ::iosX64
     }
-}
 
-dependencies {
-    implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
-
-    testImplementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesTest)
-    testRuntimeOnly(libs.junit.jupiterEngine)
-    testImplementation(libs.junit.jupiterApi)
-    testImplementation(libs.mockk)
-}
-
-detekt {
-    source = files("src/main/java", "src/main/kotlin")
-    config = rootProject.files("build-config/detekt.yml")
-    buildUponDefaultConfig = true
-    reports {
-        sarif {
-            enabled = true
+    iosTarget("ios") {
+        binaries {
+            framework {
+                baseName = "domain"
+            }
         }
     }
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+            }
+        }
+        val androidMain by getting
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation("junit:junit:4.13.2")
+            }
+        }
+        val iosMain by getting
+        val iosTest by getting
+    }
 }
 
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
+android {
+    compileSdk = appConfig.versions.compileSdk.get().toInt()
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    defaultConfig {
+        minSdk = appConfig.versions.minSdk.get().toInt()
+        targetSdk = appConfig.versions.targetSdk.get().toInt()
     }
 }

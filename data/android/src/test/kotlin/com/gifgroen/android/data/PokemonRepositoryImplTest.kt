@@ -1,7 +1,7 @@
 package com.gifgroen.android.data
 
-import com.gifgroen.domain.data.PokemonDataCache
-import com.gifgroen.domain.data.PokemonDataSource
+import com.gifgroen.pokejournal.domain.data.PokemonDataCache
+import com.gifgroen.pokejournal.domain.data.PokemonDataSource
 import com.gifgroen.domain.data.PokemonRepository
 import com.gifgroen.domain.entities.Pokemon
 import io.mockk.*
@@ -21,10 +21,10 @@ import org.junit.jupiter.api.extension.ExtendWith
 class PokemonRepositoryImplTest {
 
     @MockK
-    lateinit var remoteDataStore: PokemonDataSource
+    lateinit var remoteDataStore: com.gifgroen.pokejournal.domain.data.PokemonDataSource
 
     @MockK
-    private lateinit var localDataCache: PokemonDataCache
+    private lateinit var localDataCache: com.gifgroen.pokejournal.domain.data.PokemonDataCache
 
     private val pokemon = Pokemon(10, "charmander")
 

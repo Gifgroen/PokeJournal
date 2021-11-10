@@ -2,9 +2,9 @@ package com.gifgroen.pokejournal.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gifgroen.domain.entities.Pokemon
-import com.gifgroen.domain.usecases.GetPokemonUseCase
-import com.gifgroen.domain.usecases.ListPokemonUseCase
+import com.gifgroen.pokejournal.domain.entities.Pokemon
+import com.gifgroen.pokejournal.domain.usecases.GetPokemonUseCase
+import com.gifgroen.pokejournal.domain.usecases.ListPokemonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers

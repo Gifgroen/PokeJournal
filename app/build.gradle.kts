@@ -72,8 +72,8 @@ kapt {
 }
 
 dependencies {
-    implementation(project(":data:android"))
     implementation(project(":domain"))
+    implementation(project(":data:android"))
 
     implementation(libs.androidx.activityCompose)
     implementation(libs.androidx.compose.foundation)

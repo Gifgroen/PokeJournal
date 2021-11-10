@@ -1,7 +1,7 @@
-package com.gifgroen.domain.usecases
+package com.gifgroen.pokejournal.domain.usecases
 
-import com.gifgroen.domain.data.PokemonRepository
-import com.gifgroen.domain.entities.Pokemon
+import com.gifgroen.pokejournal.domain.data.PokemonRepository
+import com.gifgroen.pokejournal.domain.entities.Pokemon
 import kotlinx.coroutines.coroutineScope
 
 class GetPokemonUseCase(private val pokemonRepository: PokemonRepository) {

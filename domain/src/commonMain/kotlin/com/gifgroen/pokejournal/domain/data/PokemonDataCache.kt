@@ -1,6 +1,6 @@
-package com.gifgroen.domain.data
+package com.gifgroen.pokejournal.domain.data
 
-import com.gifgroen.domain.entities.Pokemon
+import com.gifgroen.pokejournal.domain.entities.Pokemon
 
 interface PokemonDataCache {
 
