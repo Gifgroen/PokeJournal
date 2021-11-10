@@ -1,8 +1,9 @@
 package com.gifgroen.pokejournal.di
 
-import com.gifgroen.android.api.PokeApi
-import com.gifgroen.android.data.PokemonRemoteDataSourceImpl
+//import com.gifgroen.android.api.PokeApi
+//import com.gifgroen.android.data.PokemonRemoteDataSourceImpl
 import com.gifgroen.pokejournal.domain.data.PokemonDataSource
+import com.gifgroen.pokejournal.domain.entities.Pokemon
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,5 +15,15 @@ import dagger.hilt.android.components.ViewModelComponent
 class DataSourceModule {
 
     @Provides
-    fun providesDataSource(api: PokeApi): PokemonDataSource = PokemonRemoteDataSourceImpl(api)
+    fun providesDataSource(): PokemonDataSource {
+         return object : PokemonDataSource {
+             override suspend fun getPokemonAsync(): List<Pokemon> {
+                 return emptyList()
+             }
+
+             override suspend fun getPokemonAsync(id: Int): Pokemon {
+                 return Pokemon(0, "")
+             }
+         }
+    }
 }

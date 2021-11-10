@@ -1,6 +1,6 @@
 package com.gifgroen.pokejournal.di
 
-import com.gifgroen.android.api.PokeApi
+//import com.gifgroen.android.api.PokeApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +15,8 @@ import javax.inject.Named
 @InstallIn(ActivityComponent::class, ViewModelComponent::class)
 class NetworkModule {
 
-    @Provides
-    fun providesPokeApi(retrofit: Retrofit): PokeApi = retrofit.create(PokeApi::class.java)
+//    @Provides
+//    fun providesPokeApi(retrofit: Retrofit): PokeApi = retrofit.create(PokeApi::class.java)
 
     @Provides
     fun providesRetrofit(
