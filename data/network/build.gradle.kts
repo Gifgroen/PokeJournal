@@ -14,7 +14,7 @@ kotlin {
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-//        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
         else -> ::iosX64
     }
 
@@ -23,11 +23,11 @@ kotlin {
     cocoapods {
         summary = "Multiplatform API provision of PokeApi using Ktor"
         homepage = "https://gifgroen.com"
-        ios.deploymentTarget = "14.1"
+        ios.deploymentTarget = "14.0"
         framework {
-            baseName = "data:network"
-            // set path to your ios project podfile, e.g. podfile = project.file("../iosApp/Podfile")
+            baseName = "PokeapiNetwork"
         }
+        podfile = project.file("../../iosApp/PokeJournaliOS/Podfile")
     }
     
     sourceSets {

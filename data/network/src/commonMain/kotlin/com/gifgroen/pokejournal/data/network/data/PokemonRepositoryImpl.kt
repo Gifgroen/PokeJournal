@@ -1,4 +1,4 @@
-package com.gifgroen.android.data
+package com.gifgroen.pokejournal.data.network.data
 
 import com.gifgroen.pokejournal.domain.data.PokemonDataSource
 import com.gifgroen.pokejournal.domain.data.PokemonRepository
