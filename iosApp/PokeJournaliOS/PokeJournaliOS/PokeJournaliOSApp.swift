@@ -1,10 +1,17 @@
 import SwiftUI
-// import PokeapiNetwork
+import PokeapiNetwork
 
 @main
 struct PokeJournaliOSApp: App {
 
-//     var p: PokemonRepository? = nil
+    public init() {
+        let p = PokemonRepositoryImpl(
+          remoteDataStore: PokemonRemoteDataSourceImpl(
+            api: PokeApi()
+          )
+        )
+        print("p = \(p.description)")
+    }
 
     var body: some Scene {
         WindowGroup {

@@ -8,7 +8,7 @@ target 'PokeJournaliOS' do
   platform :ios, '14.1'
 
   # Pods for PokeJournaliOS
-#   pod 'network', :path => '../../data/network'
+  pod 'network', :path => '../../data/network'
   
   target 'PokeJournaliOSTests' do
     inherit! :search_paths
