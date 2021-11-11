@@ -36,7 +36,6 @@ kotlin {
                 implementation(project(":domain"))
 
                 implementation(libs.ktor.client.serialization)
-                implementation(libs.ktor.cio)
                 implementation(libs.ktor.core)
                 implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
                 implementation(libs.orgJetbrainsKotlinx.kotlinxSerializationJson)
