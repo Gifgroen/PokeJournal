@@ -1,13 +1,16 @@
-//
-//  ContentView.swift
-//  PokeJournaliOS
-//
-//  Created by Karsten Westra on 11/11/2021.
-//
-
 import SwiftUI
+import PokeapiNetwork
 
 struct ContentView: View {
+
+    public init() {
+        let p = PokemonRepositoryImpl(remoteDataStore: PokemonRemoteDataSourceImpl(api: PokeApi()))
+        p.getPokemonAsync { (pokemon: [DomainPokemon]?, err: Error?) in
+            guard let pokemon = pokemon else { return }
+            print("pokemon = \(pokemon)")
+        }
+    }
+
     var body: some View {
         Text("Hello, world!")
             .padding()
