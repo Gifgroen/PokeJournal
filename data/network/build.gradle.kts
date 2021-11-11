@@ -23,7 +23,7 @@ kotlin {
     cocoapods {
         summary = "Multiplatform API provision of PokeApi using Ktor"
         homepage = "https://gifgroen.com"
-        ios.deploymentTarget = "14.0"
+        ios.deploymentTarget = "14.1"
         framework {
             baseName = "PokeapiNetwork"
         }

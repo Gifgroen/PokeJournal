@@ -1,16 +1,3 @@
-PODS:
-  - network (1.0)
-
-DEPENDENCIES:
-  - network (from `../../data/network`)
-
-EXTERNAL SOURCES:
-  network:
-    :path: "../../data/network"
-
-SPEC CHECKSUMS:
-  network: f2df4b66a1673e6d8f31d81bd5e2b31857d7f106
-
-PODFILE CHECKSUM: 14a9e9f15faf2c631f845e2e21a937bbf3addf91
+PODFILE CHECKSUM: 838e3c7536f3e1de0575c93516fb8c83d8d1f0cb
 
 COCOAPODS: 1.11.2
