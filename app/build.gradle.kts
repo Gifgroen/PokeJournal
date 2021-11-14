@@ -72,7 +72,6 @@ kapt {
 }
 
 dependencies {
-    implementation(project(":domain"))
     implementation(project(":data:network"))
 
     implementation(libs.androidx.activityCompose)

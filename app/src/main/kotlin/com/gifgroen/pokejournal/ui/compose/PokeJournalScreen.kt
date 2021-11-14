@@ -74,9 +74,9 @@ fun PokeJournalScreenPreview() {
     val pokemonFlow: MutableState<List<Pokemon>> = remember {
         mutableStateOf(
             listOf(
-                Pokemon(id = 1, name = "Foo"),
-                Pokemon(id = 2, name = "Bar"),
-                Pokemon(id = 3, name = "Baz")
+                Pokemon(id = 1, name = "Foo", sprite = ""),
+                Pokemon(id = 2, name = "Bar", sprite = ""),
+                Pokemon(id = 3, name = "Baz", sprite = "")
             )
         )
     }

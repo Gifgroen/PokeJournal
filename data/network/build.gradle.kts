@@ -33,7 +33,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":domain"))
+                api(project(":domain"))
 
                 implementation(libs.ktor.client.serialization)
                 implementation(libs.ktor.core)

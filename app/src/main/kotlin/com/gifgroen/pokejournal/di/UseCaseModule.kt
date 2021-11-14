@@ -1,8 +1,8 @@
 package com.gifgroen.pokejournal.di
 
 import com.gifgroen.pokejournal.domain.data.PokemonRepository
-import com.gifgroen.pokejournal.domain.usecases.GetPokemonUseCase
-import com.gifgroen.pokejournal.domain.usecases.ListPokemonUseCase
+import com.gifgroen.pokejournal.data.network.usecases.GetPokemonUseCase
+import com.gifgroen.pokejournal.data.network.usecases.ListPokemonUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

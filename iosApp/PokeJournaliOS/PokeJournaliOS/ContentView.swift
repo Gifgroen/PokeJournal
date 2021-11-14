@@ -5,9 +5,13 @@ struct ContentView: View {
 
     public init() {
         let p = PokemonRepositoryImpl(remoteDataStore: PokemonRemoteDataSourceImpl(api: PokeApi()))
-        p.getPokemonAsync { (pokemon: [DomainPokemon]?, err: Error?) in
-            guard let pokemon = pokemon else { return }
-            print("pokemon = \(pokemon)")
+        let useCase = ListPokemonUseCase(pokemonRepository: p)
+        useCase.getPokemonAsync { (pokemonList: [DomainPokemon]?, error: Error?) in
+            print("error = \(error)")
+            guard let items = pokemonList else { return }
+            for item in items {
+                print("item = \(item)")
+            }
         }
     }
 
