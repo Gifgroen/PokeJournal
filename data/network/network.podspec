@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
     spec.license                  = ''
     spec.summary                  = 'Multiplatform API provision of PokeApi using Ktor'
 
-    spec.vendored_frameworks      = "build/cocoapods/framework/data:network.framework"
+    spec.vendored_frameworks      = "build/cocoapods/framework/PokeapiNetwork.framework"
     spec.libraries                = "c++"
     spec.module_name              = "#{spec.name}_umbrella"
 

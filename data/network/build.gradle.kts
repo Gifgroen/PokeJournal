@@ -14,7 +14,7 @@ kotlin {
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
-//        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
         else -> ::iosX64
     }
 
@@ -25,18 +25,17 @@ kotlin {
         homepage = "https://gifgroen.com"
         ios.deploymentTarget = "14.1"
         framework {
-            baseName = "data:network"
-            // set path to your ios project podfile, e.g. podfile = project.file("../iosApp/Podfile")
+            baseName = "PokeapiNetwork"
         }
+        podfile = project.file("../../iosApp/PokeJournaliOS/Podfile")
     }
     
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":domain"))
+                api(project(":domain"))
 
                 implementation(libs.ktor.client.serialization)
-                implementation(libs.ktor.cio)
                 implementation(libs.ktor.core)
                 implementation(libs.orgJetbrainsKotlinx.kotlinxCoroutinesCore)
                 implementation(libs.orgJetbrainsKotlinx.kotlinxSerializationJson)

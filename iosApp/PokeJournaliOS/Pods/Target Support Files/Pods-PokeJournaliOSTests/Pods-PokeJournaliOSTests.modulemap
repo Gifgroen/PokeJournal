@@ -1,0 +1,6 @@
+framework module Pods_PokeJournaliOSTests {
+  umbrella header "Pods-PokeJournaliOSTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
